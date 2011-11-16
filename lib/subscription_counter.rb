@@ -1,10 +1,13 @@
 require "date"
+
 require "hominid"
+require "gruff"
 
 require_relative "../config/mailchimp_settings"  
 
 require_relative "subscription_counter/campaign"
 require_relative "subscription_counter/week_stats"
+require_relative "subscription_counter/graph"
 
 class SubscriptionCounter
   include Enumerable
