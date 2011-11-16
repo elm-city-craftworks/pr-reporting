@@ -2,14 +2,11 @@ require_relative "lib/subscription_counter"
 
 counter = SubscriptionCounter.new(SubscriptionCounter::Campaign.all, 12)
 
-p counter.map { |e| [e.issue_number, e.subscriber_count] }
-
-issue_numbers     = counter.map(&:issue_number)
-subscriber_counts = counter.map(&:subscriber_count)
+weekly_change = SubscriptionCounter::WeeklyChange.new(counter)
 
 graph = SubscriptionCounter::Graph.new(
-           :title  => "Subscriber count by week",
-           :labels => issue_numbers,
-           :data   => subscriber_counts)
+           :title  => "Change in subscribers by week",
+           :labels => weekly_change.issue_numbers,
+           :data   => weekly_change.weekly_counts)
 
 graph.save_as("weekly_count.png")

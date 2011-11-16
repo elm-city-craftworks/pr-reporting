@@ -8,6 +8,7 @@ require_relative "../config/mailchimp_settings"
 require_relative "subscription_counter/campaign"
 require_relative "subscription_counter/week_stats"
 require_relative "subscription_counter/graph"
+require_relative "subscription_counter/weekly_change"
 
 class SubscriptionCounter
   include Enumerable
@@ -26,5 +27,13 @@ class SubscriptionCounter
 
   def each
     @data.each { |e| yield(e) }
+  end
+
+  def issue_numbers
+    map(&:issue_number)
+  end
+
+  def weekly_counts
+    map(&:subscriber_count)
   end
 end
