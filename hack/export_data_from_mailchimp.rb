@@ -1,7 +1,7 @@
 require "hominid"
 require "date"
 
-require_relative "config/mailchimp_settings"
+require_relative "../config/mailchimp_settings"
 
 h = Hominid::API.new(MailChimp::SETTINGS[:api_key])
 
