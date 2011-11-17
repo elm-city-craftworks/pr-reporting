@@ -139,11 +139,12 @@ in this case it doesn&rsquo;t make much sense to mix in its methods.</p>
           <a class="pilcrow" href="#section-7">&#182;</a>
         </div>
         <p>MailChimp&rsquo;s API has a cool, if a bit cumbersome API for filtering lists of
-subscribers. The code below matches active subscribers who are not marked as
-members of the &ldquo;Free Subscription&rdquo; group and have joined Practicing Ruby
-before the date of the current campaign. The <code>campaign_segment_test</code> call
-provides a simple count of how many subscribers match that filter,
-which is exactly what is needed for this report.</p>
+subscribers. The <code>subscriber_count</code> code matches active subscribers who 
+are not marked as members of the &ldquo;Free Subscription&rdquo; group and have 
+joined Practicing Ruby before the date of the current campaign. 
+The <code>campaign_segment_test</code> call provides a simple count of how many 
+subscribers match that filter, which is exactly what is needed for this 
+report.</p>
       </td>
       <td class=code>
         <div class='highlight'><pre>    <span class="k">def</span> <span class="nf">subscriber_count</span>
