@@ -115,6 +115,17 @@ that.</p>
         <div class="pilwrap">
           <a class="pilcrow" href="#section-6">&#182;</a>
         </div>
+        <hr/>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre></pre></div>
+      </td>
+    </tr>
+    <tr id='section-7'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-7">&#182;</a>
+        </div>
         <p>Because <code>Campaign.new</code> is not meant to be called directly, I inject
 the <code>Hominid::API</code> object without providing any sort of default. I use
 <code>Hash#fetch</code> instead of <code>Hash#[]</code> here to make it so that an error will be
@@ -128,14 +139,24 @@ in debugging, and can be useful for catching typos as well.</p>
       <span class="vi">@date</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="ss">:date</span><span class="p">)</span>
     <span class="k">end</span>
 
-    <span class="kp">attr_reader</span> <span class="ss">:date</span>
-    </pre></div>
+    <span class="kp">attr_reader</span> <span class="ss">:date</span></pre></div>
       </td>
     </tr>
-    <tr id='section-7'>
+    <tr id='section-8'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-7">&#182;</a>
+          <a class="pilcrow" href="#section-8">&#182;</a>
+        </div>
+        <hr/>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>    </pre></div>
+      </td>
+    </tr>
+    <tr id='section-9'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-9">&#182;</a>
         </div>
         <p>By implementing the <code>&lt;=&gt;</code> operator, a list of campaign objects (such as
 the one in <code>Campaign.all)</code> can be sorted implicitly by date. Often times
@@ -148,10 +169,21 @@ in this case it doesn&rsquo;t make much sense to mix in its methods.</p>
     <span class="k">end</span></pre></div>
       </td>
     </tr>
-    <tr id='section-8'>
+    <tr id='section-10'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-8">&#182;</a>
+          <a class="pilcrow" href="#section-10">&#182;</a>
+        </div>
+        <hr/>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre></pre></div>
+      </td>
+    </tr>
+    <tr id='section-11'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-11">&#182;</a>
         </div>
         <p>MailChimp&rsquo;s API has a cool, if a bit cumbersome API for filtering lists of
 subscribers. The <code>subscriber_count</code> code matches active subscribers who 
@@ -182,10 +214,21 @@ MailChimp API.</p>
     <span class="kp">private</span> </pre></div>
       </td>
     </tr>
-    <tr id='section-9'>
+    <tr id='section-12'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-9">&#182;</a>
+          <a class="pilcrow" href="#section-12">&#182;</a>
+        </div>
+        <hr/>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre></pre></div>
+      </td>
+    </tr>
+    <tr id='section-13'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-13">&#182;</a>
         </div>
         <p>STYLE POINT: I like to avoid referencing instance variables in all places except for
 my constructor and explicitly defined setter methods. However, it seems
@@ -200,10 +243,10 @@ difference. Comments welcome!</p>
 <span class="k">end</span></pre></div>
       </td>
     </tr>
-    <tr id='section-10'>
+    <tr id='section-14'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-10">&#182;</a>
+          <a class="pilcrow" href="#section-14">&#182;</a>
         </div>
         <p><em>NOTE: If you&rsquo;re attempting to do a comprehensive walkthrough of this codebase,
 you will probably want to check out the <a href="data_series">DataSeries</a> object next.
