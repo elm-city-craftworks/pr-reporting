@@ -100,7 +100,7 @@ that.</p>
         </div>
         <p>Because <code>Campaign.new</code> is not meant to be called directly, I inject
 the <code>Hominid::API</code> object without providing any sort of default. I use
-Hash#fetch instead of <code>Hash#[]</code> here to make it so that an error will be
+<code>Hash#fetch</code> instead of <code>Hash#[]</code> here to make it so that an error will be
 raised if you leave out any of the required parameters. This is helpful
 in debugging, and can be useful for catching typos as well.</p>
 
