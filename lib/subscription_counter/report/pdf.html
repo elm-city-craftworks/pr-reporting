@@ -31,6 +31,104 @@
     </tr>
   </thead>
   <tbody>
+    <tr id='section-1'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-1">&#182;</a>
+        </div>
+        <p>The <code>Report::PDF</code> object is responsible for composing the data provided by a <code>Report</code> object into a nicely formatted PDF document.</p>
+
+      </td>
+      <td class=code>
+        <div class='highlight'><pre><span class="k">module</span> <span class="nn">SubscriptionCounter</span>
+  <span class="k">class</span> <span class="nc">Report</span>
+    <span class="k">class</span> <span class="nc">PDF</span>
+      <span class="kp">include</span> <span class="no">Prawn</span><span class="o">::</span><span class="no">Measurements</span>
+
+      <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">report</span><span class="p">)</span>
+        <span class="vi">@report</span>   <span class="o">=</span> <span class="n">report</span>
+        <span class="vi">@document</span> <span class="o">=</span> <span class="no">Prawn</span><span class="o">::</span><span class="no">Document</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:page_layout</span>   <span class="o">=&gt;</span> <span class="ss">:landscape</span><span class="p">,</span>
+                                        <span class="ss">:top_margin</span>    <span class="o">=&gt;</span> <span class="n">in2pt</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+                                        <span class="ss">:bottom_margin</span> <span class="o">=&gt;</span> <span class="n">in2pt</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+
+        <span class="vi">@document</span><span class="o">.</span><span class="n">float</span> <span class="p">{</span> <span class="n">draw_graphs</span> <span class="p">}</span>
+
+        <span class="n">draw_header</span>
+        <span class="n">draw_summary_table</span>
+      <span class="k">end</span>
+
+      <span class="k">def</span> <span class="nf">save_as</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="n">document</span><span class="o">.</span><span class="n">render_file</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+      <span class="k">end</span>
+
+      <span class="kp">private</span>
+
+      <span class="kp">attr_reader</span> <span class="ss">:report</span><span class="p">,</span> <span class="ss">:document</span>
+
+      <span class="k">def</span> <span class="nf">draw_header</span>
+        <span class="n">document</span><span class="o">.</span><span class="n">text</span> <span class="s2">&quot;Practicing Ruby Weekly Report&quot;</span><span class="p">,</span> <span class="ss">:size</span> <span class="o">=&gt;</span> <span class="mi">24</span>
+        <span class="n">document</span><span class="o">.</span><span class="n">text</span> <span class="s2">&quot;This report summarizes the subscriber count and &quot;</span><span class="o">+</span>
+                       <span class="s2">&quot;change in</span><span class="se">\n</span><span class="s2">subscriber count over time.&quot;</span>
+
+        <span class="n">document</span><span class="o">.</span><span class="n">move_down</span><span class="p">(</span><span class="n">in2pt</span><span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">75</span><span class="p">))</span>
+      <span class="k">end</span>
+
+      <span class="k">def</span> <span class="nf">draw_summary_table</span>
+        <span class="n">header</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;Date&quot;</span><span class="p">,</span>              <span class="s2">&quot;Issue Number&quot;</span><span class="p">,</span> 
+                  <span class="s2">&quot;Total Subscribers&quot;</span><span class="p">,</span> <span class="s2">&quot;Change in Subscribers&quot;</span><span class="o">]</span>
+
+        <span class="n">body</span>   <span class="o">=</span> <span class="n">report</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="ss">:date</span><span class="p">,</span><span class="ss">:number</span><span class="p">,</span><span class="ss">:count</span><span class="p">,</span><span class="ss">:delta</span><span class="p">)</span>
+
+        <span class="n">document</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="o">[</span><span class="n">header</span><span class="o">]+</span><span class="n">body</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+          <span class="n">t</span><span class="o">.</span><span class="n">header</span> <span class="o">=</span> <span class="kp">true</span>
+          <span class="n">t</span><span class="o">.</span><span class="n">style</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">columns</span><span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span> <span class="p">{</span> <span class="o">|</span><span class="n">c</span><span class="o">|</span> <span class="n">c</span><span class="o">.</span><span class="n">align</span> <span class="o">=</span> <span class="ss">:right</span> <span class="p">}</span>
+        <span class="k">end</span>
+      <span class="k">end</span>
+
+      <span class="k">def</span> <span class="nf">draw_graphs</span>
+        <span class="n">image_options</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">:width</span>    <span class="o">=&gt;</span> <span class="p">(</span><span class="n">document</span><span class="o">.</span><span class="n">bounds</span><span class="o">.</span><span class="n">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="mi">0</span><span class="o">.</span><span class="mi">75</span><span class="p">,</span>
+                          <span class="ss">:position</span> <span class="o">=&gt;</span> <span class="ss">:right</span> <span class="p">}</span>
+
+        <span class="no">Dir</span><span class="o">.</span><span class="n">mktmpdir</span> <span class="k">do</span> <span class="o">|</span><span class="n">dir</span><span class="o">|</span>
+          <span class="n">document</span><span class="o">.</span><span class="n">image</span><span class="p">(</span><span class="n">weekly_total_graph</span><span class="p">(</span><span class="n">dir</span><span class="p">),</span> <span class="n">image_options</span><span class="p">)</span>
+
+          <span class="n">document</span><span class="o">.</span><span class="n">move_down</span><span class="p">(</span><span class="n">in2pt</span><span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">5</span><span class="p">))</span>
+
+          <span class="n">document</span><span class="o">.</span><span class="n">image</span><span class="p">(</span><span class="n">weekly_change_graph</span><span class="p">(</span><span class="n">dir</span><span class="p">),</span> <span class="n">image_options</span><span class="p">)</span>
+        <span class="k">end</span>
+      <span class="k">end</span>
+
+      <span class="k">def</span> <span class="nf">weekly_total_graph</span><span class="p">(</span><span class="n">dir</span><span class="p">)</span>
+        <span class="n">total_graph_file</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">dir</span><span class="si">}</span><span class="s2">/subscribers_by_week.png&quot;</span>
+
+        <span class="n">total_graph</span> <span class="o">=</span> <span class="no">Graph</span><span class="o">.</span><span class="n">build</span><span class="p">(</span>
+          <span class="ss">:title</span>    <span class="o">=&gt;</span> <span class="s2">&quot;Total subscribers by week&quot;</span><span class="p">,</span>
+          <span class="ss">:labels</span>   <span class="o">=&gt;</span> <span class="n">report</span><span class="o">.</span><span class="n">issue_numbers</span><span class="p">,</span>
+          <span class="ss">:data</span>     <span class="o">=&gt;</span> <span class="n">report</span><span class="o">.</span><span class="n">weekly_counts</span><span class="p">,</span>
+          <span class="ss">:file</span>     <span class="o">=&gt;</span> <span class="n">total_graph_file</span>
+        <span class="p">)</span>
+        
+        <span class="n">total_graph_file</span>
+      <span class="k">end</span>
+
+      <span class="k">def</span> <span class="nf">weekly_change_graph</span><span class="p">(</span><span class="n">dir</span><span class="p">)</span>
+        <span class="n">change_graph_file</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">dir</span><span class="si">}</span><span class="s2">/change_by_week.png&quot;</span>
+
+        <span class="n">change_graph</span> <span class="o">=</span> <span class="no">Graph</span><span class="o">.</span><span class="n">build</span><span class="p">(</span>
+          <span class="ss">:title</span>    <span class="o">=&gt;</span> <span class="s2">&quot;Change in subscriber count by week&quot;</span><span class="p">,</span>
+          <span class="ss">:labels</span>   <span class="o">=&gt;</span> <span class="n">report</span><span class="o">.</span><span class="n">issue_numbers</span><span class="p">,</span>
+          <span class="ss">:data</span>     <span class="o">=&gt;</span> <span class="n">report</span><span class="o">.</span><span class="n">weekly_deltas</span><span class="p">,</span>
+          <span class="ss">:baseline</span> <span class="o">=&gt;</span> <span class="n">report</span><span class="o">.</span><span class="n">average_delta</span><span class="p">,</span>
+          <span class="ss">:file</span>     <span class="o">=&gt;</span> <span class="n">change_graph_file</span>
+        <span class="p">)</span>
+
+        <span class="n">change_graph_file</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span></pre></div>
+      </td>
+    </tr>
   </table>
 </div>
 </body>
