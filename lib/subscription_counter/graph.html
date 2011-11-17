@@ -122,6 +122,12 @@ explains the cryptic <code>dev.off()</code> call which finalizes writing the fil
 <em>title</em>. If a <em>baseline</em> is provided, a horizontal dotted line will be drawn 
 at the specified position.</p>
 
+<p>The most awkward thing I&rsquo;ve found about any way of working with graphs in
+Ruby is the way axis labeling is handled. From what I&rsquo;ve seen, R provides
+the most sensible defaults when it comes to step sizes and min/max values,
+but it still involves a bit of manual futzing around to get things to work
+cleanly.</p>
+
       </td>
       <td class=code>
         <div class='highlight'><pre>  <span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="no">Graph</span>
