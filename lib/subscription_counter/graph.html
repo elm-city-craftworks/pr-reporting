@@ -113,6 +113,15 @@ reading various posts about how to generate graphs in R. It goes without
 saying that R has a pretty weird way of doing things, but it also happens
 to be incredibly flexible.</p>
 
+<p>While I&rsquo;m not an experienced R programmer, I am pretty sure the way this
+code works is by setting the rendering surface to be a PNG file instead of
+the windowing system which R would typically write its graphs to. This
+explains the cryptic <code>dev.off()</code> call which finalizes writing the file.</p>
+
+<p>To generate a graph, <em>data</em> and <em>labels</em> must be provided, as well as a
+<em>title</em>. If a <em>baseline</em> is provided, a horizontal dotted line will be drawn 
+at the specified position.</p>
+
       </td>
       <td class=code>
         <div class='highlight'><pre>  <span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="no">Graph</span>
