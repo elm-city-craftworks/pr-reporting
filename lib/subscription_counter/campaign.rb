@@ -1,7 +1,5 @@
 module SubscriptionCounter
   class Campaign
-    include Comparable
-
     def self.all
       api  = Hominid::API.new(MAILCHIMP_SETTINGS[:api_key])
       data = api.campaigns(:list_id => MAILCHIMP_SETTINGS[:list_id])["data"]
