@@ -169,12 +169,25 @@ like a bad idea to define public accessors for data that won&rsquo;t be used by
 the consumer. So lately I&rsquo;ve been defining private accessors. I am still
 not sure if the break from conventions is justified for such a small API
 difference. Comments welcome!</p>
-
       </td>
       <td class=code>
         <div class='highlight'><pre>    <span class="kp">attr_reader</span> <span class="ss">:api</span><span class="p">,</span> <span class="ss">:id</span>
   <span class="k">end</span>
 <span class="k">end</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-9'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-9">&#182;</a>
+        </div>
+        <p><code>Campaign</code> objects are meant to be processed by the
+<a href="data_series.html">DataSeries</a> object, and
+do not directly interact with the rest of the application. </p>
+
+      </td>
+      <td class=code>
+        <div class='highlight'><pre></pre></div>
       </td>
     </tr>
   </table>
