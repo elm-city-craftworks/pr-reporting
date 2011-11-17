@@ -77,8 +77,21 @@ via the <code>SubscriptionCounter::MAILCHIMP_SETTINGS</code> constant.</p>
         <div class="pilwrap">
           <a class="pilcrow" href="#section-4">&#182;</a>
         </div>
-        <p><a href="subscription_counter/campaign.html">SubscriptionCounter::Campaign</a> integrates
-with MailChimp to pull down subscriber counts and dates for each campaign.</p>
+        <p>I did what I could to make this code as modular as possible, although some
+modules still have some hardcoded values in them because I was aiming more for
+clear separations of concerns than generality/reuse.</p>
+
+<ul>
+<li><a href="subscription_counter/campaign.html">SubscriptionCounter::Campaign</a> integrates
+with MailChimp to pull down subscriber counts and dates for each campaign.</li>
+<li><a href="subscription_counter/data_series.html">SubscriptionCounter::DataSeries</a> and
+<a href="subscription_counter/data_point.html">SubscriptionCounter::DataPoint</a> are
+the datastructures that I normalize the mailchimp data into. The goal in
+creating them was to make it possible for the report to be reasonably
+decoupled from <code>SubscriptionCounter::Campaign</code> so that I could load this
+same data from a different representation down the line (such as a CSV
+file).</li>
+</ul>
 
       </td>
       <td class=code>
