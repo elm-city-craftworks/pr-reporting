@@ -1,7 +1,7 @@
-class SubscriptionCounter
+module SubscriptionCounter
   Statistics = Object.new
 
-  Statistics.instance_eval do
+  class << Statistics 
     def mean(list)
       list.reduce(:+) / list.length.to_f
     end

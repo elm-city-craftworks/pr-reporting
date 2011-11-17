@@ -1,4 +1,4 @@
-class SubscriptionCounter
+module SubscriptionCounter
   class DataPoint
     def initialize(params)
       @number = params.fetch(:number)

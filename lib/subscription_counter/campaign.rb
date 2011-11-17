@@ -1,13 +1,12 @@
-class SubscriptionCounter
+module SubscriptionCounter
   class Campaign
     include Comparable
 
     def self.all
-      api = Hominid::API.new(MailChimp::SETTINGS[:api_key])
-
-      data = api.campaigns(:list_id => MailChimp::SETTINGS[:list_id])["data"]
+      api  = Hominid::API.new(MAILCHIMP_SETTINGS[:api_key])
+      data = api.campaigns(:list_id => MAILCHIMP_SETTINGS[:list_id] )["data"]
       
-      campaigns = data.map.with_index do |e,i|
+      campaigns = data.map do |e|
         new(:api    => api, 
             :id     => e["id"], 
             :date   => Date.parse(e["send_time"]))
@@ -16,7 +15,7 @@ class SubscriptionCounter
       campaigns.sort 
     end
 
-    def initialize(params={})
+    def initialize(params)
       @api    = params.fetch(:api)
       @id     = params.fetch(:id)
       @date   = params.fetch(:date)
@@ -30,13 +29,13 @@ class SubscriptionCounter
 
     def subscriber_count
       conditions = [{:field => "date", :op => "lt", :value => id},
-                    {:field => "interests-#{MailChimp::SETTINGS[:grouping_id]}", 
+                    {:field => "interests-#{MAILCHIMP_SETTINGS[:grouping_id]}", 
                      :op    => "none", 
-                    :value => "Free Subscription"}]
+                     :value => "Free Subscription"}]
 
-      api.campaign_segment_test MailChimp::SETTINGS[:list_id], 
-        :match      => "all", 
-        :conditions => conditions 
+      api.campaign_segment_test MAILCHIMP_SETTINGS[:list_id], 
+                                :match      => "all", 
+                                :conditions => conditions 
     end
 
     private 

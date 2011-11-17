@@ -1,4 +1,4 @@
-class SubscriptionCounter
+module SubscriptionCounter
   class Report
     class PDF
       include Prawn::Measurements
@@ -59,12 +59,12 @@ class SubscriptionCounter
       def weekly_total_graph(dir)
         total_graph_file = "#{dir}/subscribers_by_week.png"
 
-        total_graph = SubscriptionCounter::Graph.new(
+        total_graph = Graph.build(
           :title    => "Total subscribers by week",
           :labels   => report.issue_numbers,
-          :data     => report.weekly_counts)
-
-        total_graph.save_as(total_graph_file)
+          :data     => report.weekly_counts,
+          :file     => total_graph_file
+        )
         
         total_graph_file
       end
@@ -72,13 +72,13 @@ class SubscriptionCounter
       def weekly_change_graph(dir)
         change_graph_file = "#{dir}/change_by_week.png"
 
-        change_graph = SubscriptionCounter::Graph.new(
+        change_graph = Graph.build(
           :title    => "Change in subscriber count by week",
           :labels   => report.issue_numbers,
           :data     => report.weekly_deltas,
-          :baseline => report.average_delta)
-
-        change_graph.save_as(change_graph_file)
+          :baseline => report.average_delta,
+          :file     => change_graph_file
+        )
 
         change_graph_file
       end
