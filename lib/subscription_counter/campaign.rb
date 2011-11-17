@@ -7,15 +7,19 @@ class SubscriptionCounter
 
       data = api.campaigns(:list_id => MailChimp::SETTINGS[:list_id])["data"]
       
-      data.map { |e|
-        new(:api => api, :id => e["id"], :date => Date.parse(e["send_time"]))
-      }.sort 
+      campaigns = data.map.with_index do |e,i|
+        new(:api    => api, 
+            :id     => e["id"], 
+            :date   => Date.parse(e["send_time"]))
+      end
+      
+      campaigns.sort 
     end
 
     def initialize(params={})
-      @api  = params.fetch(:api)
-      @id   = params.fetch(:id)
-      @date = params.fetch(:date)
+      @api    = params.fetch(:api)
+      @id     = params.fetch(:id)
+      @date   = params.fetch(:date)
     end
 
     attr_reader :date

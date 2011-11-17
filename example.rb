@@ -1,12 +1,8 @@
 require_relative "lib/subscription_counter"
 
-counter = SubscriptionCounter.new(SubscriptionCounter::Campaign.all, 12)
+campaigns = SubscriptionCounter::Campaign.all
 
-weekly_change = SubscriptionCounter::WeeklyChange.new(counter)
+counter   = SubscriptionCounter.new(campaigns, 10)
+report    = SubscriptionCounter::Report.new(counter)
 
-graph = SubscriptionCounter::Graph.new(
-           :title  => "Change in subscribers by week",
-           :labels => weekly_change.issue_numbers,
-           :data   => weekly_change.weekly_counts)
-
-graph.save_as("weekly_count.png")
+SubscriptionCounter::Report::PDF.new(report).save_as("foo.pdf")
