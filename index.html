@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <title>subscription_counter.rb</title>
+  <link rel="stylesheet" href="http://jashkenas.github.com/docco/resources/docco.css">
+</head>
+<body>
+<div id='container'>
+  <div id="background"></div>
+  <div id="jump_to">
+    Jump To &hellip;
+    <div id="jump_wrapper">
+      <div id="jump_page">
+          <a class="source" href="subscription_counter.html">subscription_counter.rb</a>
+          <a class="source" href="subscription_counter/campaign.html">campaign.rb</a>
+          <a class="source" href="subscription_counter/data_point.html">data_point.rb</a>
+          <a class="source" href="subscription_counter/data_series.html">data_series.rb</a>
+          <a class="source" href="subscription_counter/graph.html">graph.rb</a>
+          <a class="source" href="subscription_counter/report.html">report.rb</a>
+          <a class="source" href="subscription_counter/report/pdf.html">pdf.rb</a>
+          <a class="source" href="subscription_counter/statistics.html">statistics.rb</a>
+      </div>
+    </div>
+  </div>
+  <table cellspacing=0 cellpadding=0>
+  <thead>
+    <tr>
+      <th class=docs><h1>subscription_counter.rb</h1></th>
+      <th class=code></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr id='section-1'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-1">&#182;</a>
+        </div>
+        <p>This is a sample reporting application meant to accompany Practicing Ruby
+Issue 2.13. </p>
+
+      </td>
+      <td class=code>
+        <div class='highlight'><pre><span class="nb">require</span> <span class="s2">&quot;date&quot;</span>
+<span class="nb">require</span> <span class="s2">&quot;tempfile&quot;</span>
+
+<span class="nb">require</span> <span class="s2">&quot;rsruby&quot;</span>
+<span class="nb">require</span> <span class="s2">&quot;hominid&quot;</span>
+<span class="nb">require</span> <span class="s2">&quot;prawn&quot;</span>
+
+<span class="n">require_relative</span> <span class="s2">&quot;../config/mailchimp_settings&quot;</span>
+
+<span class="n">require_relative</span> <span class="s2">&quot;subscription_counter/campaign&quot;</span>
+<span class="n">require_relative</span> <span class="s2">&quot;subscription_counter/data_point&quot;</span>
+<span class="n">require_relative</span> <span class="s2">&quot;subscription_counter/data_series&quot;</span>
+<span class="n">require_relative</span> <span class="s2">&quot;subscription_counter/graph&quot;</span>
+<span class="n">require_relative</span> <span class="s2">&quot;subscription_counter/statistics&quot;</span>
+<span class="n">require_relative</span> <span class="s2">&quot;subscription_counter/report&quot;</span>
+<span class="n">require_relative</span> <span class="s2">&quot;subscription_counter/report/pdf&quot;</span></pre></div>
+      </td>
+    </tr>
+  </table>
+</div>
+</body>
