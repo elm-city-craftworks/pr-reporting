@@ -36,8 +36,9 @@
         <div class="pilwrap">
           <a class="pilcrow" href="#section-1">&#182;</a>
         </div>
-        <p>While <code>Campaign.all</code> grabs all campaigns for a given MailChimp list, my
-report actually target the last N campaigns (roughly corresponding to weeks in
+        <p>While <code>Campaign.all</code> grabs all campaign dates and subscriber counts for a
+given mailing list, my report actually target the last N campaigns 
+(roughly corresponding to weeks in
 Practicing Ruby&rsquo;s case). I created this <code>DataSeries</code> object to deal with that
 issue as well as to provide a bit of a bufferzone between the code that
 interacts with the <a href="http://apidocs.mailchimp.com/">MailChimp API</a> and the rest 
