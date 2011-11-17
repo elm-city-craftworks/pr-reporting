@@ -50,20 +50,46 @@ directly with MailChimp, using Hominid to do so.</p>
           <a class="pilcrow" href="#section-2">&#182;</a>
         </div>
         <p>Calling <code>Campaign.all</code> fetches all the campaigns in mailchimp for
-the list reference by <code>MAILCHIMP_SETTINGS[:list_id]</code>.</p>
-
+the list reference by <code>MAILCHIMP_SETTINGS[:list_id]</code></p>
       </td>
       <td class=code>
         <div class='highlight'><pre>    <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">all</span>
       <span class="n">api</span>  <span class="o">=</span> <span class="no">Hominid</span><span class="o">::</span><span class="no">API</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="no">MAILCHIMP_SETTINGS</span><span class="o">[</span><span class="ss">:api_key</span><span class="o">]</span><span class="p">)</span>
       <span class="n">data</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">campaigns</span><span class="p">(</span><span class="ss">:list_id</span> <span class="o">=&gt;</span> <span class="no">MAILCHIMP_SETTINGS</span><span class="o">[</span><span class="ss">:list_id</span><span class="o">]</span><span class="p">)</span><span class="o">[</span><span class="s2">&quot;data&quot;</span><span class="o">]</span>
-      
+      </pre></div>
+      </td>
+    </tr>
+    <tr id='section-3'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-3">&#182;</a>
+        </div>
+        <p>Once the raw campaign data is downloaded from MailChimp, the data
+gets normalized slightly and then transformed into <code>Campaign</code> 
+instances.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>      
       <span class="n">campaigns</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">e</span><span class="o">|</span>
         <span class="kp">new</span><span class="p">(</span><span class="ss">:api</span>  <span class="o">=&gt;</span> <span class="n">api</span><span class="p">,</span> 
             <span class="ss">:id</span>   <span class="o">=&gt;</span> <span class="n">e</span><span class="o">[</span><span class="s2">&quot;id&quot;</span><span class="o">]</span><span class="p">,</span> 
             <span class="ss">:date</span> <span class="o">=&gt;</span> <span class="no">Date</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">e</span><span class="o">[</span><span class="s2">&quot;send_time&quot;</span><span class="o">]</span><span class="p">))</span>
       <span class="k">end</span>
-      
+     </pre></div>
+      </td>
+    </tr>
+    <tr id='section-4'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-4">&#182;</a>
+        </div>
+        <p>To make life easier later, we sort the output by date. Note that this
+makes use of the <code>Campaign#&lt;=&gt;</code> method automatically: Ruby is smart like
+that.</p>
+
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>       
       <span class="n">campaigns</span><span class="o">.</span><span class="n">sort</span> 
     <span class="k">end</span>
 
