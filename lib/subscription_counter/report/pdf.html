@@ -382,9 +382,8 @@ numeric, so it makes sense to right align them.</p>
           <a class="pilcrow" href="#section-21">&#182;</a>
         </div>
         <p><em>NOTE</em>: If you&rsquo;ve been doing the guided walkthrough, congratulations, you&rsquo;ve
-made it to the end! You may be wondering at this point how this whole system
-comes together, and for that reason I&rsquo;ve listed the source for my executable
-file which generates the PDF report below.</p>
+made it to the end! Below I&rsquo;ve listed the source for my executable file 
+that I use to tie all these objects together. </p>
       </td>
       <td class=code>
         <div class='highlight'><pre></pre></div>
@@ -395,14 +394,16 @@ file which generates the PDF report below.</p>
         <div class="pilwrap">
           <a class="pilcrow" href="#section-22">&#182;</a>
         </div>
-        <p>require<em>relative &ldquo;../lib/subscription</em>counter&rdquo;</p>
+        <pre>
+   require_relative &ldquo;../lib/subscription_counter&rdquo;
 
-<p>campaigns = SubscriptionCounter::Campaign.all
-series    = SubscriptionCounter::DataSeries.new(campaigns, 10)
-report    = SubscriptionCounter::Report.new(series)</p>
+   campaigns = SubscriptionCounter::Campaign.all
+   series    = SubscriptionCounter::DataSeries.new(campaigns, 10)
+   report    = SubscriptionCounter::Report.new(series)
 
-<p>SubscriptionCounter::Report::PDF.new(report)
-  .save_as(ARGV[0] || &ldquo;pr-subscribers.pdf&rdquo;)</p>
+   SubscriptionCounter::Report::PDF.new(report)
+     .save_as(ARGV[0] || &ldquo;pr-subscribers.pdf&rdquo;)
+</pre>
 
       </td>
       <td class=code>
