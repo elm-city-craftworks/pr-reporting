@@ -347,7 +347,6 @@ Don&rsquo;t take this approach as a best practice for working with Prawn :)</p>
         <p>To render the summary table, a header row is added to the array of arrays
 provided by <code>Report.table</code>. All columns except for the date column are
 numeric, so it makes sense to right align them.</p>
-
       </td>
       <td class=code>
         <div class='highlight'><pre>      <span class="k">def</span> <span class="nf">draw_summary_table</span>
@@ -364,6 +363,50 @@ numeric, so it makes sense to right align them.</p>
     <span class="k">end</span>
   <span class="k">end</span>
 <span class="k">end</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-20'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-20">&#182;</a>
+        </div>
+        <hr/>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre></pre></div>
+      </td>
+    </tr>
+    <tr id='section-21'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-21">&#182;</a>
+        </div>
+        <p><em>NOTE</em>: If you&rsquo;ve been doing the guided walkthrough, congratulations, you&rsquo;ve
+made it to the end! You may be wondering at this point how this whole system
+comes together, and for that reason I&rsquo;ve listed the source for my executable
+file which generates the PDF report below.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre></pre></div>
+      </td>
+    </tr>
+    <tr id='section-22'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-22">&#182;</a>
+        </div>
+        <p>require<em>relative &ldquo;../lib/subscription</em>counter&rdquo;</p>
+
+<p>campaigns = SubscriptionCounter::Campaign.all
+series    = SubscriptionCounter::DataSeries.new(campaigns, 10)
+report    = SubscriptionCounter::Report.new(series)</p>
+
+<p>SubscriptionCounter::Report::PDF.new(report)
+  .save_as(ARGV[0] || &ldquo;pr-subscribers.pdf&rdquo;)</p>
+
+      </td>
+      <td class=code>
+        <div class='highlight'><pre></pre></div>
       </td>
     </tr>
   </table>
