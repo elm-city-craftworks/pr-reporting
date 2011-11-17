@@ -41,6 +41,14 @@
 <a href="http://github.com/sandal/prawn">Prawn</a> to generate the text and tables, and
 leans on <a href="https://github.com/alexgutteridge/rsruby">RSRuby</a> via my trivial <a href="http://elm-city-craftworks.github.com/pr-reporting/lib/subscription_counter/graph.html">Graph</a> wrapper object.</p>
 
+<p>Because the report this implements is meant to represent a fixed amount of
+information at a time, I cut a lot of corners and sized/positioned many of the
+report elements absolutely. Designing reports which need to grow and shrink
+dynamically can be a real challenge, and would require much more clever
+composition than what you see here. Prawn has facilities that make that sort
+of reporting possible, but there is no need to make this particular report any
+more challenging than it already is.</p>
+
       </td>
       <td class=code>
         <div class='highlight'><pre><span class="k">module</span> <span class="nn">SubscriptionCounter</span>
