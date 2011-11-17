@@ -103,7 +103,6 @@ the <code>Hominid::API</code> object without providing any sort of default. I us
 <code>Hash#fetch</code> instead of <code>Hash#[]</code> here to make it so that an error will be
 raised if you leave out any of the required parameters. This is helpful
 in debugging, and can be useful for catching typos as well.</p>
-
       </td>
       <td class=code>
         <div class='highlight'><pre>    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
@@ -113,8 +112,22 @@ in debugging, and can be useful for catching typos as well.</p>
     <span class="k">end</span>
 
     <span class="kp">attr_reader</span> <span class="ss">:date</span>
+    </pre></div>
+      </td>
+    </tr>
+    <tr id='section-6'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-6">&#182;</a>
+        </div>
+        <p>By implementing the <code>&lt;=&gt;</code> operator, a list of campaign objects (such as
+the one in <code>Campaign.all)</code> can be sorted implicitly by date. Often times
+when you implement <code>&lt;=&gt;</code>, you will also want to <code>include Comparable</code>, but
+in this case it doesn&rsquo;t make much sense to mix in its methods.</p>
 
-    <span class="k">def</span> <span class="nf">&lt;=&gt;</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>    <span class="k">def</span> <span class="nf">&lt;=&gt;</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
       <span class="n">date</span> <span class="o">&lt;=&gt;</span> <span class="n">other</span><span class="o">.</span><span class="n">date</span>
     <span class="k">end</span>
 
