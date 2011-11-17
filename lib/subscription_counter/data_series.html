@@ -93,8 +93,7 @@ objects, the dependency is implicit and other objects could easily be
 substituted. This is by design.</p>
       </td>
       <td class=code>
-        <div class='highlight'><pre>    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">campaigns</span><span class="p">,</span> <span class="n">num_weeks</span><span class="p">)</span>
-      <span class="n">campaign_number</span> <span class="o">=</span> <span class="n">campaigns</span><span class="o">.</span><span class="n">size</span> <span class="o">-</span> <span class="n">num_weeks</span></pre></div>
+        <div class='highlight'><pre>    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">campaigns</span><span class="p">,</span> <span class="n">num_weeks</span><span class="p">)</span></pre></div>
       </td>
     </tr>
     <tr id='section-5'>
@@ -109,7 +108,10 @@ preceded it.</p>
 
       </td>
       <td class=code>
-        <div class='highlight'><pre>      <span class="vi">@data</span> <span class="o">=</span> <span class="n">campaigns</span><span class="o">.</span><span class="n">last</span><span class="p">(</span><span class="n">num_weeks</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">each_cons</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">last</span><span class="p">,</span> <span class="n">current</span><span class="o">|</span>
+        <div class='highlight'><pre>      
+      <span class="n">campaign_number</span> <span class="o">=</span> <span class="n">campaigns</span><span class="o">.</span><span class="n">size</span> <span class="o">-</span> <span class="n">num_weeks</span>
+
+      <span class="vi">@data</span> <span class="o">=</span> <span class="n">campaigns</span><span class="o">.</span><span class="n">last</span><span class="p">(</span><span class="n">num_weeks</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">each_cons</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">last</span><span class="p">,</span> <span class="n">current</span><span class="o">|</span>
         <span class="n">campaign_number</span> <span class="o">+=</span> <span class="mi">1</span>
 
         <span class="no">DataPoint</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:number</span> <span class="o">=&gt;</span> <span class="n">campaign_number</span><span class="p">,</span> 
