@@ -83,11 +83,10 @@ the list reference by <code>MAILCHIMP_SETTINGS[:list_id]</code></p>
         </div>
         <p>Once the raw campaign data is downloaded from MailChimp, the data
 gets normalized slightly and then transformed into <code>Campaign</code> 
-instances.</p>
+instances. </p>
       </td>
       <td class=code>
-        <div class='highlight'><pre>      
-      <span class="n">campaigns</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">e</span><span class="o">|</span>
+        <div class='highlight'><pre>      <span class="n">campaigns</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">e</span><span class="o">|</span>
         <span class="kp">new</span><span class="p">(</span><span class="ss">:api</span>  <span class="o">=&gt;</span> <span class="n">api</span><span class="p">,</span> 
             <span class="ss">:id</span>   <span class="o">=&gt;</span> <span class="n">e</span><span class="o">[</span><span class="s2">&quot;id&quot;</span><span class="o">]</span><span class="p">,</span> 
             <span class="ss">:date</span> <span class="o">=&gt;</span> <span class="no">Date</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">e</span><span class="o">[</span><span class="s2">&quot;send_time&quot;</span><span class="o">]</span><span class="p">))</span>
