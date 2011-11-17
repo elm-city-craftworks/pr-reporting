@@ -76,7 +76,6 @@ to display a baseline representing the average number of new subscribers
 gained each week, after outliers have been removed. Check out the
 <a href="statistics.html">Statistics</a> object if you want to see how this
 computation is implemented.</p>
-
       </td>
       <td class=code>
         <div class='highlight'><pre>    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">series</span><span class="p">)</span>
@@ -87,11 +86,25 @@ computation is implemented.</p>
       <span class="vi">@weekly_deltas</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:delta</span><span class="p">)</span>
       <span class="vi">@average_delta</span> <span class="o">=</span> <span class="no">Statistics</span><span class="o">.</span><span class="n">adjusted_mean</span><span class="p">(</span><span class="vi">@weekly_deltas</span><span class="p">)</span>
     <span class="k">end</span>
-
+ 
     <span class="kp">attr_reader</span> <span class="ss">:issue_numbers</span><span class="p">,</span> <span class="ss">:weekly_counts</span><span class="p">,</span> <span class="ss">:weekly_deltas</span><span class="p">,</span> 
-                <span class="ss">:average_delta</span><span class="p">,</span> <span class="ss">:summary</span><span class="p">,</span> <span class="ss">:series</span>
+                <span class="ss">:average_delta</span><span class="p">,</span> <span class="ss">:summary</span><span class="p">,</span> <span class="ss">:series</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-4'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-4">&#182;</a>
+        </div>
+        <hr/>
 
-    <span class="k">def</span> <span class="nf">table</span><span class="p">(</span><span class="o">*</span><span class="n">fields</span><span class="p">)</span>
+<p>This method will generate a row of data for each <code>DataPoint</code> object in the
+<code>DataSeries</code> collection by accessing the specified fields in order. This
+is used to make table generation easier in <a href="report/pdf.html">Report::PDF</a></p>
+
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>    <span class="k">def</span> <span class="nf">table</span><span class="p">(</span><span class="o">*</span><span class="n">fields</span><span class="p">)</span>
       <span class="n">series</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">e</span><span class="o">|</span> <span class="n">fields</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span> <span class="n">e</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="p">}</span> <span class="p">}</span>
     <span class="k">end</span>
   <span class="k">end</span>
