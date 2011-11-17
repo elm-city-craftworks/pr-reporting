@@ -74,9 +74,9 @@ more challenging than it already is.</p>
         </div>
         <p>Mixing in this module makes it possible to write <code>in2pt(1)</code> instead of
 <code>Prawn::Measurements.in2pt(1)</code>. I am generally against doing this sort
-of thing, but the fact that Prawn does not provide a
-better way to specify point conversions which does not pollute the
-global namespace makes me feel like its worth it to sacrifice some
+of thing, but the alternatives are either to use this giant name in many
+places or enable Prawn&rsquo;s monkeypatches to <code>Numeric</code>. Since neither of
+those options sound good, it is worth it to sacrifice some
 purity in the name of convenience. However, be sure to note that
 stripping namespaces is a code smell.</p>
 
