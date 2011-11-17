@@ -1,7 +1,7 @@
 module SubscriptionCounter
   class Report
     def initialize(series)
-      @series       = series
+      @series = series
 
       @issue_numbers = series.map(&:number)
       @weekly_counts = series.map(&:count)
