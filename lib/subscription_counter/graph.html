@@ -31,6 +31,66 @@
     </tr>
   </thead>
   <tbody>
+    <tr id='section-1'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-1">&#182;</a>
+        </div>
+        <p><code>Graph</code> provides a very thin wrapper over calls to the R programming language,
+via <a href="(https://github.com/alexgutteridge/rsruby">RSRuby</a>. It is mostly full of
+hardcoded values, and would need to be generalized in order to be used as a
+general purpose graph generation object. The only reason it is currently
+extracted into its own object is to allow <a href="report/pdf.html">Report::PDF</a> to
+reference an internal API rather than an external one.</p>
+
+<p>While that may seem of limited benefit, I ended up attempting to use several 
+different graphing libraries while working on this report. I first started
+working with Gruff, and then attempted to switch to Google Charts after
+finding a bug in the way Gruff draws baselines. Unfortunately, Google Charts
+had similarly confusing issues, and so I didn&rsquo;t settle on using R until my
+third attempt.</p>
+
+<p>Because this is a brand new system, changing the graphing engine would be easy
+whether or not an extraction existed for it. However, as this system grows and
+changes, it will get increasingly hard to make those sort of switches if they
+weren&rsquo;t accounted for early on in its design. This is why it rarely hurts to
+create an internal API wrapping an external dependency, even if that wrapper
+is not doing much to generalize your code.</p>
+
+      </td>
+      <td class=code>
+        <div class='highlight'><pre><span class="k">module</span> <span class="nn">SubscriptionCounter</span>
+  <span class="no">Graph</span> <span class="o">=</span> <span class="no">Object</span><span class="o">.</span><span class="n">new</span>
+  
+  <span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="no">Graph</span>
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>    
+      <span class="n">data</span>   <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="ss">:data</span><span class="p">)</span>
+      <span class="n">labels</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="ss">:labels</span><span class="p">)</span> 
+
+      <span class="n">r</span> <span class="o">=</span> <span class="no">RSRuby</span><span class="o">.</span><span class="n">instance</span>
+
+      <span class="n">r</span><span class="o">.</span><span class="n">png</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="ss">:file</span><span class="p">),</span> <span class="ss">:width</span> <span class="o">=&gt;</span> <span class="mi">400</span><span class="p">,</span> <span class="ss">:height</span> <span class="o">=&gt;</span> <span class="mi">300</span><span class="p">)</span> 
+
+      <span class="n">r</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="ss">:x</span>     <span class="o">=&gt;</span> <span class="n">data</span><span class="p">,</span>
+             <span class="ss">:type</span>  <span class="o">=&gt;</span> <span class="s2">&quot;o&quot;</span><span class="p">,</span>         
+             <span class="ss">:col</span>   <span class="o">=&gt;</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span>     
+             <span class="ss">:main</span>  <span class="o">=&gt;</span> <span class="n">params</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="ss">:title</span><span class="p">),</span>
+             <span class="ss">:xlab</span>  <span class="o">=&gt;</span> <span class="s2">&quot;Week Number&quot;</span><span class="p">,</span> 
+             <span class="ss">:ylab</span>  <span class="o">=&gt;</span> <span class="s2">&quot;Subscribers&quot;</span><span class="p">,</span>
+             <span class="ss">:xaxt</span>  <span class="o">=&gt;</span> <span class="s2">&quot;n&quot;</span><span class="p">)</span>    
+
+      <span class="k">if</span> <span class="n">baseline</span> <span class="o">=</span> <span class="n">params</span><span class="o">[</span><span class="ss">:baseline</span><span class="o">]</span>
+        <span class="n">r</span><span class="o">.</span><span class="n">abline</span><span class="p">(</span><span class="ss">:h</span> <span class="o">=&gt;</span> <span class="n">baseline</span><span class="p">,</span> <span class="ss">:col</span> <span class="o">=&gt;</span> <span class="s2">&quot;red&quot;</span><span class="p">,</span><span class="ss">:lty</span> <span class="o">=&gt;</span> <span class="s2">&quot;dotted&quot;</span><span class="p">)</span>
+      <span class="k">end</span>
+
+      <span class="n">r</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="ss">:side</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="ss">:labels</span> <span class="o">=&gt;</span> <span class="n">labels</span><span class="p">,</span> 
+                         <span class="ss">:at</span>     <span class="o">=&gt;</span> <span class="n">labels</span><span class="o">.</span><span class="n">each_index</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">})</span>
+      <span class="n">r</span><span class="o">.</span><span class="n">eval_R</span><span class="p">(</span><span class="s2">&quot;dev.off()&quot;</span><span class="p">)</span>                      
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span></pre></div>
+      </td>
+    </tr>
   </table>
 </div>
 </body>
