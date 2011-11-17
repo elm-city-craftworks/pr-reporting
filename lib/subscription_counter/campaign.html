@@ -38,12 +38,23 @@
         </div>
         <p>The campaign object is the only part of this application which interacts
 directly with MailChimp, using Hominid to do so.</p>
-
       </td>
       <td class=code>
         <div class='highlight'><pre><span class="k">module</span> <span class="nn">SubscriptionCounter</span>
-  <span class="k">class</span> <span class="nc">Campaign</span>
-    <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">all</span>
+  <span class="k">class</span> <span class="nc">Campaign</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-2'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-2">&#182;</a>
+        </div>
+        <p>Calling <code>Campaign.all</code> fetches all the campaigns in mailchimp for
+the list reference by <code>MAILCHIMP_SETTINGS[:list_id]</code>.</p>
+
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>    <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">all</span>
       <span class="n">api</span>  <span class="o">=</span> <span class="no">Hominid</span><span class="o">::</span><span class="no">API</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="no">MAILCHIMP_SETTINGS</span><span class="o">[</span><span class="ss">:api_key</span><span class="o">]</span><span class="p">)</span>
       <span class="n">data</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">campaigns</span><span class="p">(</span><span class="ss">:list_id</span> <span class="o">=&gt;</span> <span class="no">MAILCHIMP_SETTINGS</span><span class="o">[</span><span class="ss">:list_id</span><span class="o">]</span><span class="p">)</span><span class="o">[</span><span class="s2">&quot;data&quot;</span><span class="o">]</span>
       
