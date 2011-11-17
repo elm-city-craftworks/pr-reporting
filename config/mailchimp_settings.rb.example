@@ -1,0 +1,7 @@
+module SubscriptionCounter
+  MAILCHIMP_SETTINGS = { :list_id      => 'LIST_ID_HERE',
+                         :grouping_id  => 'GROUPING_ID_HERE',
+                         :api_key      => 'KEY_HERE' }
+
+  private_constant :MAILCHIMP_SETTINGS
+end
