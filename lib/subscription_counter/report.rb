@@ -9,11 +9,11 @@ module SubscriptionCounter
       @average_delta = Statistics.adjusted_mean(@weekly_deltas)
     end
 
+    attr_reader :issue_numbers, :weekly_counts, :weekly_deltas, 
+                :average_delta, :summary, :series
+
     def table(*fields)
       series.map { |e| fields.map { |f| e.send(f) } }
     end
-
-    attr_reader :issue_numbers, :weekly_counts, :weekly_deltas, 
-                :average_delta, :summary, :series
   end
 end
