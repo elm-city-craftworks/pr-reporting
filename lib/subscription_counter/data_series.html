@@ -31,6 +31,49 @@
     </tr>
   </thead>
   <tbody>
+    <tr id='section-1'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-1">&#182;</a>
+        </div>
+        <p>While <code>Campaign.all</code> grabs all campaigns for a given MailChimp list, my
+report actually target the last N campaigns (roughly corresponding to weeks in
+Practicing Ruby&rsquo;s case). I created this <code>DataSeries</code> object to deal with that
+issue as well as to provide a bit of a bufferzone between the code that
+interacts with the MailChimp API and the rest of the system. This in theory
+will make it easier for me to pull from other data sources in the future, and
+also makes testing easier.</p>
+
+      </td>
+      <td class=code>
+        <div class='highlight'><pre><span class="k">module</span> <span class="nn">SubscriptionCounter</span>
+  <span class="k">class</span> <span class="nc">DataSeries</span>
+    <span class="kp">include</span> <span class="no">Enumerable</span>
+
+    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">campaigns</span><span class="p">,</span> <span class="n">num_weeks</span><span class="p">)</span>
+      <span class="n">campaign_number</span> <span class="o">=</span> <span class="n">campaigns</span><span class="o">.</span><span class="n">size</span> <span class="o">-</span> <span class="n">num_weeks</span>
+
+      <span class="vi">@data</span> <span class="o">=</span> <span class="n">campaigns</span><span class="o">.</span><span class="n">last</span><span class="p">(</span><span class="n">num_weeks</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">each_cons</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">last</span><span class="p">,</span> <span class="n">current</span><span class="o">|</span>
+        <span class="n">campaign_number</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="no">DataPoint</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:number</span> <span class="o">=&gt;</span> <span class="n">campaign_number</span><span class="p">,</span> 
+                      <span class="ss">:date</span>   <span class="o">=&gt;</span> <span class="n">current</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y.%m.%d&quot;</span><span class="p">),</span> 
+                      <span class="ss">:count</span>  <span class="o">=&gt;</span> <span class="n">current</span><span class="o">.</span><span class="n">subscriber_count</span><span class="p">,</span>
+                      <span class="ss">:delta</span>  <span class="o">=&gt;</span> <span class="n">current</span><span class="o">.</span><span class="n">subscriber_count</span> <span class="o">-</span> <span class="n">last</span><span class="o">.</span><span class="n">subscriber_count</span><span class="p">)</span>
+      <span class="k">end</span> 
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nf">each</span>
+      <span class="n">data</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">e</span><span class="o">|</span> <span class="k">yield</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="p">}</span>
+    <span class="k">end</span>
+
+    <span class="kp">private</span>
+
+    <span class="kp">attr_reader</span> <span class="ss">:data</span>
+  <span class="k">end</span>
+<span class="k">end</span></pre></div>
+      </td>
+    </tr>
   </table>
 </div>
 </body>
