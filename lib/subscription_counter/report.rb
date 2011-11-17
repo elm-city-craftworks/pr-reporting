@@ -10,10 +10,10 @@ module SubscriptionCounter
     end
 
     def table(*fields)
-      @series.map { |e| fields.map { |f| e.send(f) } }
+      series.map { |e| fields.map { |f| e.send(f) } }
     end
 
     attr_reader :issue_numbers, :weekly_counts, :weekly_deltas, 
-                :average_delta, :summary
+                :average_delta, :summary, :series
   end
 end
