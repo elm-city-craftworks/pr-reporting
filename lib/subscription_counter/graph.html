@@ -66,6 +66,17 @@ is not doing much to generalize your code.</p>
         <div class="pilwrap">
           <a class="pilcrow" href="#section-2">&#182;</a>
         </div>
+        <hr/>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre></pre></div>
+      </td>
+    </tr>
+    <tr id='section-3'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-3">&#182;</a>
+        </div>
         <p>Here I&rsquo;ve used a non-standard approach to creating singleton objects in
 Ruby. I&rsquo;m generally fed up with the usual options of class methods or module
 methods, and so I am approaching this pattern by using a plain old Ruby
@@ -74,13 +85,37 @@ object which I then reopen and add methods to.</p>
 <p>This approach has its upsides and downsides, all of which I&rsquo;ve discussed in
 <a href="http://practicingruby.com">Practicing Ruby</a> Issue 2.8. However, it seems to
 be the least offensive option for defining a single namespaced method. </p>
-
       </td>
       <td class=code>
         <div class='highlight'><pre>  <span class="no">Graph</span> <span class="o">=</span> <span class="no">Object</span><span class="o">.</span><span class="n">new</span>
   
-  <span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="no">Graph</span>
-    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>    
+  <span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="no">Graph</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-4'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-4">&#182;</a>
+        </div>
+        <hr/>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre></pre></div>
+      </td>
+    </tr>
+    <tr id='section-5'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-5">&#182;</a>
+        </div>
+        <p>The <code>Graph#build</code> consists mostly of bits and pieces I&rsquo;ve cargoculted from
+reading various posts about how to generate graphs in R. It goes without
+saying that R has a pretty weird way of doing things, but it also happens
+to be incredibly flexible.</p>
+
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>    
       <span class="n">data</span>   <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="ss">:data</span><span class="p">)</span>
       <span class="n">labels</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="ss">:labels</span><span class="p">)</span> 
 
