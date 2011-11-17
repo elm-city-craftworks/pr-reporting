@@ -136,7 +136,9 @@ with the <a href="http://apidocs.mailchimp.com/api/">MailChimp API</a>, and
         </div>
         <p>I define some values in the <em>mailchimps_settings.rb</em> file and 
 reference them later via the 
-<code>SubscriptionCounter::MAILCHIMP_SETTINGS</code> constant.</p>
+<code>SubscriptionCounter::MAILCHIMP_SETTINGS</code> constant. Because this
+is just a boring hash of API keys and other database ids, you can
+safely treat it as a black box.</p>
       </td>
       <td class=code>
         <div class='highlight'><pre><span class="n">require_relative</span> <span class="s2">&quot;../config/mailchimp_settings&quot;</span></pre></div>
