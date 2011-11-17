@@ -93,25 +93,14 @@ objects, the dependency is implicit and other objects could easily be
 substituted. This is by design.</p>
       </td>
       <td class=code>
-        <div class='highlight'><pre></pre></div>
+        <div class='highlight'><pre>    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">campaigns</span><span class="p">,</span> <span class="n">num_weeks</span><span class="p">)</span>
+      <span class="n">campaign_number</span> <span class="o">=</span> <span class="n">campaigns</span><span class="o">.</span><span class="n">size</span> <span class="o">-</span> <span class="n">num_weeks</span></pre></div>
       </td>
     </tr>
     <tr id='section-5'>
       <td class=docs>
         <div class="pilwrap">
           <a class="pilcrow" href="#section-5">&#182;</a>
-        </div>
-        <p>x</p>
-      </td>
-      <td class=code>
-        <div class='highlight'><pre>    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">campaigns</span><span class="p">,</span> <span class="n">num_weeks</span><span class="p">)</span>
-      <span class="n">campaign_number</span> <span class="o">=</span> <span class="n">campaigns</span><span class="o">.</span><span class="n">size</span> <span class="o">-</span> <span class="n">num_weeks</span></pre></div>
-      </td>
-    </tr>
-    <tr id='section-6'>
-      <td class=docs>
-        <div class="pilwrap">
-          <a class="pilcrow" href="#section-6">&#182;</a>
         </div>
         <p>Using <code>each_cons</code> combined with <code>map</code> here is a handy way to
 simultaneously create a new <code>DataPoint</code> object for the current
