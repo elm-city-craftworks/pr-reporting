@@ -56,35 +56,15 @@ data sources in the future, and also makes testing easier.</p>
         <hr/>
       </td>
       <td class=code>
-        <div class='highlight'><pre></pre></div>
+        <div class='highlight'><pre><span class="k">module</span> <span class="nn">SubscriptionCounter</span>
+  <span class="k">class</span> <span class="nc">DataSeries</span>
+    </pre></div>
       </td>
     </tr>
     <tr id='section-3'>
       <td class=docs>
         <div class="pilwrap">
           <a class="pilcrow" href="#section-3">&#182;</a>
-        </div>
-        <p>The executable file that runs this report instantiates a <code>DataSeries</code> object as
-shown below:</p>
-
-<pre><code>campaigns = SubscriptionCounter::Campaign.all
-series    = SubscriptionCounter::DataSeries.new(campaigns, 10)
-</code></pre>
-
-<p>While <code>DataSeries</code> is designed to work with an array of <code>Campaign</code>
-objects, the dependency is implicit and other objects could easily be
-substituted. This is by design.</p>
-      </td>
-      <td class=code>
-        <div class='highlight'><pre><span class="k">module</span> <span class="nn">SubscriptionCounter</span>
-  <span class="k">class</span> <span class="nc">DataSeries</span>
-    </pre></div>
-      </td>
-    </tr>
-    <tr id='section-4'>
-      <td class=docs>
-        <div class="pilwrap">
-          <a class="pilcrow" href="#section-4">&#182;</a>
         </div>
         <p>Like most Ruby collections, the <code>DataSeries</code> object mixes in the <code>Enumerable</code>
 module. While in this particular application I only use this for the <code>map</code>
@@ -93,9 +73,20 @@ what <code>Enumerable</code> provides.</p>
       </td>
       <td class=code>
         <div class='highlight'><pre>    
-    <span class="kp">include</span> <span class="no">Enumerable</span>
-
-    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">campaigns</span><span class="p">,</span> <span class="n">num_weeks</span><span class="p">)</span></pre></div>
+    <span class="kp">include</span> <span class="no">Enumerable</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-4'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-4">&#182;</a>
+        </div>
+        <p>While <code>DataSeries</code> is designed to work with an array of <code>Campaign</code>
+objects, the dependency is implicit and other objects could easily be
+substituted. This is by design.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">campaigns</span><span class="p">,</span> <span class="n">num_weeks</span><span class="p">)</span></pre></div>
       </td>
     </tr>
     <tr id='section-5'>
