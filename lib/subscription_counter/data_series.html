@@ -43,11 +43,26 @@ issue as well as to provide a bit of a bufferzone between the code that
 interacts with the MailChimp API and the rest of the system. This in theory
 will make it easier for me to pull from other data sources in the future, and
 also makes testing easier.</p>
-
       </td>
       <td class=code>
         <div class='highlight'><pre><span class="k">module</span> <span class="nn">SubscriptionCounter</span>
   <span class="k">class</span> <span class="nc">DataSeries</span>
+    </pre></div>
+      </td>
+    </tr>
+    <tr id='section-2'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-2">&#182;</a>
+        </div>
+        <p>Like most Ruby collections, the <code>DataSeries</code> object mixes in the <code>Enumerable</code>
+module. While in this particular application I only use this for the <code>map</code>
+method, it would be surprising to provide just <code>map</code> and not the rest of
+what <code>Enumerable</code> provides.</p>
+
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>    
     <span class="kp">include</span> <span class="no">Enumerable</span>
 
     <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">campaigns</span><span class="p">,</span> <span class="n">num_weeks</span><span class="p">)</span>
