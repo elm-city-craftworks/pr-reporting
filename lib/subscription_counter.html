@@ -94,17 +94,8 @@ dependencies of the entire project at glance.</p>
           <a class="pilcrow" href="#section-5">&#182;</a>
         </div>
         <hr/>
-      </td>
-      <td class=code>
-        <div class='highlight'><pre></pre></div>
-      </td>
-    </tr>
-    <tr id='section-6'>
-      <td class=docs>
-        <div class="pilwrap">
-          <a class="pilcrow" href="#section-6">&#182;</a>
-        </div>
-        <p>While the dependencies almost certainly load more stdlibs, this report 
+
+<p>While the dependencies almost certainly load more stdlibs, this report 
 only explicitly depend on the <em>date</em> and <em>tempfile</em> libraries.</p>
       </td>
       <td class=code>
@@ -112,10 +103,10 @@ only explicitly depend on the <em>date</em> and <em>tempfile</em> libraries.</p>
 <span class="nb">require</span> <span class="s2">&quot;tempfile&quot;</span></pre></div>
       </td>
     </tr>
-    <tr id='section-7'>
+    <tr id='section-6'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-7">&#182;</a>
+          <a class="pilcrow" href="#section-6">&#182;</a>
         </div>
         <p>As for external dependencies: I make use of <a href="https://github.com/alexgutteridge/rsruby">RSRuby</a> 
 to integrate with the <a href="http://www.r-project.org/">R programming language</a> for graphing 
@@ -129,10 +120,10 @@ for integrating with the <a href="http://apidocs.mailchimp.com/api/">MailChimp A
 <span class="nb">require</span> <span class="s2">&quot;prawn&quot;</span></pre></div>
       </td>
     </tr>
-    <tr id='section-8'>
+    <tr id='section-7'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-8">&#182;</a>
+          <a class="pilcrow" href="#section-7">&#182;</a>
         </div>
         <p>I define some values in the <em>mailchimps_settings.rb</em> file and 
 reference them later via the 
@@ -144,10 +135,10 @@ safely treat it as a black box.</p>
         <div class='highlight'><pre><span class="n">require_relative</span> <span class="s2">&quot;../config/mailchimp_settings&quot;</span></pre></div>
       </td>
     </tr>
-    <tr id='section-9'>
+    <tr id='section-8'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-9">&#182;</a>
+          <a class="pilcrow" href="#section-8">&#182;</a>
         </div>
         <p>I did what I could to make this code as modular as possible. The list below
 outlines the different objects this system is made up of, and what their
@@ -185,23 +176,14 @@ formatted representation of the data contained in the <code>Report</code></li>
 <span class="n">require_relative</span> <span class="s2">&quot;subscription_counter/report/pdf&quot;</span></pre></div>
       </td>
     </tr>
-    <tr id='section-10'>
+    <tr id='section-9'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-10">&#182;</a>
+          <a class="pilcrow" href="#section-9">&#182;</a>
         </div>
         <hr/>
-      </td>
-      <td class=code>
-        <div class='highlight'><pre></pre></div>
-      </td>
-    </tr>
-    <tr id='section-11'>
-      <td class=docs>
-        <div class="pilwrap">
-          <a class="pilcrow" href="#section-11">&#182;</a>
-        </div>
-        <p><em>NOTE: If you start with the <a href="subscription_counter/campaign.html">Campaign</a>
+
+<p><em>NOTE: If you start with the <a href="subscription_counter/campaign.html">Campaign</a>
 object and follow the breadcrumbs at the end of each page, you should be able
 to get a nice comprehensive walkthrough of this codebase.</em></p>
 
