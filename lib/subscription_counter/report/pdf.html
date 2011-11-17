@@ -155,38 +155,50 @@ demand in a web application. YAGNI for now though.</p>
         <div class="pilwrap">
           <a class="pilcrow" href="#section-8">&#182;</a>
         </div>
+        <hr/>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre></pre></div>
+      </td>
+    </tr>
+    <tr id='section-9'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-9">&#182;</a>
+        </div>
         <p>As mentioned before, I have started experimenting with private accessors
 in my code. See the discussion in the private section of 
 <a href="/pr-reporting/lib/subscription_counter">Campaign</a> for details</p>
-
       </td>
       <td class=code>
         <div class='highlight'><pre>      <span class="kp">private</span>
 
-      <span class="kp">attr_reader</span> <span class="ss">:report</span><span class="p">,</span> <span class="ss">:document</span>
+      <span class="kp">attr_reader</span> <span class="ss">:report</span><span class="p">,</span> <span class="ss">:document</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-10'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-10">&#182;</a>
+        </div>
+        <hr/>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>      </pre></div>
+      </td>
+    </tr>
+    <tr id='section-11'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-11">&#182;</a>
+        </div>
+        <p>The graphs use a hardcoded width of 37.5% of the page size (not
+including margins)</p>
 
-      <span class="k">def</span> <span class="nf">draw_header</span>
-        <span class="n">document</span><span class="o">.</span><span class="n">text</span> <span class="s2">&quot;Practicing Ruby Weekly Report&quot;</span><span class="p">,</span> <span class="ss">:size</span> <span class="o">=&gt;</span> <span class="mi">24</span>
-        <span class="n">document</span><span class="o">.</span><span class="n">text</span> <span class="s2">&quot;This report summarizes the subscriber count and &quot;</span><span class="o">+</span>
-                       <span class="s2">&quot;change in</span><span class="se">\n</span><span class="s2">subscriber count over time.&quot;</span>
-
-        <span class="n">document</span><span class="o">.</span><span class="n">move_down</span><span class="p">(</span><span class="n">in2pt</span><span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">75</span><span class="p">))</span>
-      <span class="k">end</span>
-
-      <span class="k">def</span> <span class="nf">draw_summary_table</span>
-        <span class="n">header</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;Date&quot;</span><span class="p">,</span>              <span class="s2">&quot;Issue Number&quot;</span><span class="p">,</span> 
-                  <span class="s2">&quot;Total Subscribers&quot;</span><span class="p">,</span> <span class="s2">&quot;Change in Subscribers&quot;</span><span class="o">]</span>
-
-        <span class="n">body</span>   <span class="o">=</span> <span class="n">report</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="ss">:date</span><span class="p">,</span><span class="ss">:number</span><span class="p">,</span><span class="ss">:count</span><span class="p">,</span><span class="ss">:delta</span><span class="p">)</span>
-
-        <span class="n">document</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="o">[</span><span class="n">header</span><span class="o">]+</span><span class="n">body</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
-          <span class="n">t</span><span class="o">.</span><span class="n">header</span> <span class="o">=</span> <span class="kp">true</span>
-          <span class="n">t</span><span class="o">.</span><span class="n">style</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">columns</span><span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span> <span class="p">{</span> <span class="o">|</span><span class="n">c</span><span class="o">|</span> <span class="n">c</span><span class="o">.</span><span class="n">align</span> <span class="o">=</span> <span class="ss">:right</span> <span class="p">}</span>
-        <span class="k">end</span>
-      <span class="k">end</span>
-
-      <span class="k">def</span> <span class="nf">draw_graphs</span>
-        <span class="n">image_options</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">:width</span>    <span class="o">=&gt;</span> <span class="p">(</span><span class="n">document</span><span class="o">.</span><span class="n">bounds</span><span class="o">.</span><span class="n">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="mi">0</span><span class="o">.</span><span class="mi">75</span><span class="p">,</span>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>      <span class="k">def</span> <span class="nf">draw_graphs</span>
+        <span class="n">image_options</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">:width</span>    <span class="o">=&gt;</span> <span class="n">document</span><span class="o">.</span><span class="n">bounds</span><span class="o">.</span><span class="n">width</span> <span class="o">*</span> <span class="mi">0</span><span class="o">.</span><span class="mi">375</span><span class="p">,</span>
                           <span class="ss">:position</span> <span class="o">=&gt;</span> <span class="ss">:right</span> <span class="p">}</span>
 
         <span class="no">Dir</span><span class="o">.</span><span class="n">mktmpdir</span> <span class="k">do</span> <span class="o">|</span><span class="n">dir</span><span class="o">|</span>
@@ -223,6 +235,27 @@ in my code. See the discussion in the private section of
         <span class="p">)</span>
 
         <span class="n">change_graph_file</span>
+      <span class="k">end</span>
+
+
+      <span class="k">def</span> <span class="nf">draw_header</span>
+        <span class="n">document</span><span class="o">.</span><span class="n">text</span> <span class="s2">&quot;Practicing Ruby Weekly Report&quot;</span><span class="p">,</span> <span class="ss">:size</span> <span class="o">=&gt;</span> <span class="mi">24</span>
+        <span class="n">document</span><span class="o">.</span><span class="n">text</span> <span class="s2">&quot;This report summarizes the subscriber count and &quot;</span><span class="o">+</span>
+                       <span class="s2">&quot;change in</span><span class="se">\n</span><span class="s2">subscriber count over time.&quot;</span>
+
+        <span class="n">document</span><span class="o">.</span><span class="n">move_down</span><span class="p">(</span><span class="n">in2pt</span><span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">75</span><span class="p">))</span>
+      <span class="k">end</span>
+
+      <span class="k">def</span> <span class="nf">draw_summary_table</span>
+        <span class="n">header</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;Date&quot;</span><span class="p">,</span>              <span class="s2">&quot;Issue Number&quot;</span><span class="p">,</span> 
+                  <span class="s2">&quot;Total Subscribers&quot;</span><span class="p">,</span> <span class="s2">&quot;Change in Subscribers&quot;</span><span class="o">]</span>
+
+        <span class="n">body</span>   <span class="o">=</span> <span class="n">report</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="ss">:date</span><span class="p">,</span><span class="ss">:number</span><span class="p">,</span><span class="ss">:count</span><span class="p">,</span><span class="ss">:delta</span><span class="p">)</span>
+
+        <span class="n">document</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="o">[</span><span class="n">header</span><span class="o">]+</span><span class="n">body</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+          <span class="n">t</span><span class="o">.</span><span class="n">header</span> <span class="o">=</span> <span class="kp">true</span>
+          <span class="n">t</span><span class="o">.</span><span class="n">style</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">columns</span><span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span> <span class="p">{</span> <span class="o">|</span><span class="n">c</span><span class="o">|</span> <span class="n">c</span><span class="o">.</span><span class="n">align</span> <span class="o">=</span> <span class="ss">:right</span> <span class="p">}</span>
+        <span class="k">end</span>
       <span class="k">end</span>
     <span class="k">end</span>
   <span class="k">end</span>
