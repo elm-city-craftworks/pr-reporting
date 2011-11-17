@@ -40,28 +40,20 @@
 directly with MailChimp, using Hominid to do so. <code>Campaign</code> objects 
 are meant to be processed by the <a href="data_series.html">DataSeries</a> object,
 and do not directly interact with the rest of the application. </p>
+
+<p>The name &ldquo;Campaign&rdquo; is used here because that&rsquo;s what MailChimp calls the emails
+it sends. Personally I find that to stink a bit of marketing speak, but it&rsquo;s
+the right word to use to model this domain, I suppose :&ndash;/</p>
       </td>
       <td class=code>
-        <div class='highlight'><pre><span class="k">module</span> <span class="nn">SubscriptionCounter</span></pre></div>
+        <div class='highlight'><pre><span class="k">module</span> <span class="nn">SubscriptionCounter</span>
+  <span class="k">class</span> <span class="nc">Campaign</span></pre></div>
       </td>
     </tr>
     <tr id='section-2'>
       <td class=docs>
         <div class="pilwrap">
           <a class="pilcrow" href="#section-2">&#182;</a>
-        </div>
-        <p>The name &ldquo;Campaign&rdquo; is used here because that&rsquo;s what MailChimp calls the emails
-it sends. Personally I find that to stink a bit of marketing speak, but it&rsquo;s
-the right word to use to model this domain, I suppose :&ndash;/</p>
-      </td>
-      <td class=code>
-        <div class='highlight'><pre>  <span class="k">class</span> <span class="nc">Campaign</span></pre></div>
-      </td>
-    </tr>
-    <tr id='section-3'>
-      <td class=docs>
-        <div class="pilwrap">
-          <a class="pilcrow" href="#section-3">&#182;</a>
         </div>
         <p>Calling <code>Campaign.all</code> fetches all the campaigns in mailchimp for
 the list reference by <code>MAILCHIMP_SETTINGS[:list_id]</code></p>
@@ -73,10 +65,10 @@ the list reference by <code>MAILCHIMP_SETTINGS[:list_id]</code></p>
       </pre></div>
       </td>
     </tr>
-    <tr id='section-4'>
+    <tr id='section-3'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-4">&#182;</a>
+          <a class="pilcrow" href="#section-3">&#182;</a>
         </div>
         <p>Once the raw campaign data is downloaded from MailChimp, the data
 gets normalized slightly and then transformed into <code>Campaign</code> 
@@ -92,10 +84,10 @@ instances.</p>
      </pre></div>
       </td>
     </tr>
-    <tr id='section-5'>
+    <tr id='section-4'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-5">&#182;</a>
+          <a class="pilcrow" href="#section-4">&#182;</a>
         </div>
         <p>To make life easier later, we sort the output by date. Note that this
 makes use of the <code>Campaign#&lt;=&gt;</code> method automatically: Ruby is smart like
@@ -107,10 +99,10 @@ that.</p>
     <span class="k">end</span></pre></div>
       </td>
     </tr>
-    <tr id='section-6'>
+    <tr id='section-5'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-6">&#182;</a>
+          <a class="pilcrow" href="#section-5">&#182;</a>
         </div>
         <p>Because <code>Campaign.new</code> is not meant to be called directly, I inject
 the <code>Hominid::API</code> object without providing any sort of default. I use
@@ -129,10 +121,10 @@ in debugging, and can be useful for catching typos as well.</p>
     </pre></div>
       </td>
     </tr>
-    <tr id='section-7'>
+    <tr id='section-6'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-7">&#182;</a>
+          <a class="pilcrow" href="#section-6">&#182;</a>
         </div>
         <p>By implementing the <code>&lt;=&gt;</code> operator, a list of campaign objects (such as
 the one in <code>Campaign.all)</code> can be sorted implicitly by date. Often times
@@ -145,10 +137,10 @@ in this case it doesn&rsquo;t make much sense to mix in its methods.</p>
     <span class="k">end</span></pre></div>
       </td>
     </tr>
-    <tr id='section-8'>
+    <tr id='section-7'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-8">&#182;</a>
+          <a class="pilcrow" href="#section-7">&#182;</a>
         </div>
         <p>MailChimp&rsquo;s API has a cool, if a bit cumbersome API for filtering lists of
 subscribers. The <code>subscriber_count</code> code matches active subscribers who 
@@ -179,10 +171,10 @@ MailChimp API.</p>
     <span class="kp">private</span> </pre></div>
       </td>
     </tr>
-    <tr id='section-9'>
+    <tr id='section-8'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-9">&#182;</a>
+          <a class="pilcrow" href="#section-8">&#182;</a>
         </div>
         <p>STYLE POINT: I like to avoid referencing instance variables in all places except for
 my constructor and explicitly defined setter methods. However, it seems
@@ -197,10 +189,10 @@ difference. Comments welcome!</p>
 <span class="k">end</span></pre></div>
       </td>
     </tr>
-    <tr id='section-10'>
+    <tr id='section-9'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-10">&#182;</a>
+          <a class="pilcrow" href="#section-9">&#182;</a>
         </div>
         <p><em>NOTE: If you&rsquo;re attempting to do a comprehensive walkthrough of this codebase,
 you will probably want to check out the <a href="data_series">DataSeries</a> object next.
