@@ -97,7 +97,6 @@ preceded it.</p>
 <p>Additionally, by introducing the <code>DataPoint</code> object, we make it so that the rest of
 our report is completely independent of the MailChimp dependency and
 the &ldquo;campaign&rdquo; vocabulary.</p>
-
       </td>
       <td class=code>
         <div class='highlight'><pre>    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">campaigns</span><span class="p">,</span> <span class="n">num_weeks</span><span class="p">)</span>
@@ -113,9 +112,21 @@ the &ldquo;campaign&rdquo; vocabulary.</p>
                       <span class="ss">:count</span>  <span class="o">=&gt;</span> <span class="n">current</span><span class="o">.</span><span class="n">subscriber_count</span><span class="p">,</span>
                       <span class="ss">:delta</span>  <span class="o">=&gt;</span> <span class="n">current</span><span class="o">.</span><span class="n">subscriber_count</span> <span class="o">-</span> <span class="n">last</span><span class="o">.</span><span class="n">subscriber_count</span><span class="p">)</span>
       <span class="k">end</span> 
-    <span class="k">end</span>
+    <span class="k">end</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-5'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-5">&#182;</a>
+        </div>
+        <p>This is pretty much the standard boilerplate that comes along with
+mixing in the <code>Enumerable</code> method. Every time I type this I wish there was
+some nice shortcut to it ;)</p>
 
-    <span class="k">def</span> <span class="nf">each</span>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>    <span class="k">def</span> <span class="nf">each</span>
       <span class="n">data</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">e</span><span class="o">|</span> <span class="k">yield</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="p">}</span>
     <span class="k">end</span>
 
