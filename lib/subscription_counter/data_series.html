@@ -94,6 +94,19 @@ substituted. This is by design.</p>
         <div class="pilwrap">
           <a class="pilcrow" href="#section-5">&#182;</a>
         </div>
+        <p>This method keeps track of the campaign number, which corresponds to the
+Practicing Ruby issue number. This could have been done in
+<code>Campaign.all</code>, but would have been slightly less convenient there.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>      <span class="n">campaign_number</span> <span class="o">=</span> <span class="n">campaigns</span><span class="o">.</span><span class="n">size</span> <span class="o">-</span> <span class="n">num_weeks</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-6'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-6">&#182;</a>
+        </div>
         <p>Using <code>each_cons</code> combined with <code>map</code> here is a handy way to
 simultaneously create a new <code>DataPoint</code> object for the current
 campaign while also keeping track of the one that immediately
@@ -101,10 +114,7 @@ preceded it.</p>
 
       </td>
       <td class=code>
-        <div class='highlight'><pre>      
-      <span class="n">campaign_number</span> <span class="o">=</span> <span class="n">campaigns</span><span class="o">.</span><span class="n">size</span> <span class="o">-</span> <span class="n">num_weeks</span>
-
-      <span class="vi">@data</span> <span class="o">=</span> <span class="n">campaigns</span><span class="o">.</span><span class="n">last</span><span class="p">(</span><span class="n">num_weeks</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">each_cons</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">last</span><span class="p">,</span> <span class="n">current</span><span class="o">|</span>
+        <div class='highlight'><pre>      <span class="vi">@data</span> <span class="o">=</span> <span class="n">campaigns</span><span class="o">.</span><span class="n">last</span><span class="p">(</span><span class="n">num_weeks</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">each_cons</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">last</span><span class="p">,</span> <span class="n">current</span><span class="o">|</span>
         <span class="n">campaign_number</span> <span class="o">+=</span> <span class="mi">1</span>
 
         <span class="no">DataPoint</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:number</span> <span class="o">=&gt;</span> <span class="n">campaign_number</span><span class="p">,</span> 
