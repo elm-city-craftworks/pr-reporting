@@ -124,14 +124,28 @@ in debugging, and can be useful for catching typos as well.</p>
 the one in <code>Campaign.all)</code> can be sorted implicitly by date. Often times
 when you implement <code>&lt;=&gt;</code>, you will also want to <code>include Comparable</code>, but
 in this case it doesn&rsquo;t make much sense to mix in its methods.</p>
-
       </td>
       <td class=code>
         <div class='highlight'><pre>    <span class="k">def</span> <span class="nf">&lt;=&gt;</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
       <span class="n">date</span> <span class="o">&lt;=&gt;</span> <span class="n">other</span><span class="o">.</span><span class="n">date</span>
-    <span class="k">end</span>
+    <span class="k">end</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-7'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-7">&#182;</a>
+        </div>
+        <p>MailChimp&rsquo;s API has a cool, if a bit cumbersome API for filtering lists of
+subscribers. The code below matches active subscribers who are not marked as
+members of the &ldquo;Free Subscription&rdquo; group and have joined Practicing Ruby
+before the date of the current campaign. The <code>campaign_segment_test</code> call
+provides a simple count of how many subscribers match that filter,
+which is exactly what is needed for this report.</p>
 
-    <span class="k">def</span> <span class="nf">subscriber_count</span>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>    <span class="k">def</span> <span class="nf">subscriber_count</span>
       <span class="n">conditions</span> <span class="o">=</span> <span class="o">[</span><span class="p">{</span><span class="ss">:field</span> <span class="o">=&gt;</span> <span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="ss">:op</span> <span class="o">=&gt;</span> <span class="s2">&quot;lt&quot;</span><span class="p">,</span> <span class="ss">:value</span> <span class="o">=&gt;</span> <span class="nb">id</span><span class="p">},</span>
                     <span class="p">{</span><span class="ss">:field</span> <span class="o">=&gt;</span> <span class="s2">&quot;interests-</span><span class="si">#{</span><span class="no">MAILCHIMP_SETTINGS</span><span class="o">[</span><span class="ss">:grouping_id</span><span class="o">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> 
                      <span class="ss">:op</span>    <span class="o">=&gt;</span> <span class="s2">&quot;none&quot;</span><span class="p">,</span> 
