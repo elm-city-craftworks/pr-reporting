@@ -80,16 +80,16 @@ is not doing much to generalize your code.</p>
         <p>Here I&rsquo;ve used a non-standard approach to creating singleton objects in
 Ruby. I&rsquo;m generally fed up with the usual options of class methods or module
 methods, and so I am approaching this pattern by using a plain old Ruby
-object which I then reopen and add methods to.</p>
+object which I can later reopen and add methods to. I assign it to a
+constant so that it looks similar to a module and can be accessed easily
+throughout the application.</p>
 
 <p>This approach has its upsides and downsides, all of which I&rsquo;ve discussed in
 <a href="http://practicingruby.com">Practicing Ruby</a> Issue 2.8. However, it seems to
 be the least offensive option for defining a single namespaced method. </p>
       </td>
       <td class=code>
-        <div class='highlight'><pre>  <span class="no">Graph</span> <span class="o">=</span> <span class="no">Object</span><span class="o">.</span><span class="n">new</span>
-  
-  <span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="no">Graph</span></pre></div>
+        <div class='highlight'><pre>  <span class="no">Graph</span> <span class="o">=</span> <span class="no">Object</span><span class="o">.</span><span class="n">new</span></pre></div>
       </td>
     </tr>
     <tr id='section-4'>
@@ -115,7 +115,8 @@ to be incredibly flexible.</p>
 
       </td>
       <td class=code>
-        <div class='highlight'><pre>    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>    
+        <div class='highlight'><pre>  <span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="no">Graph</span>
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>    
       <span class="n">data</span>   <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="ss">:data</span><span class="p">)</span>
       <span class="n">labels</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="ss">:labels</span><span class="p">)</span> 
 
