@@ -91,12 +91,21 @@ creating them was to make it possible for the report to be reasonably
 decoupled from <code>SubscriptionCounter::Campaign</code> so that I could load this
 same data from a different representation down the line (such as a CSV
 file).</li>
+<li><a href="subscription_counter/graph.html">Graph</a> is a simple singleton object that
+wraps the R plotting functions I use. </li>
+<li><a href="subscription_counter/statistics.html">Statistics</a> is another singleton 
+object which uses R to implement an adjusted average computation that
+I use in this report.</li>
+<li><a href="subscription_counter/report.html">Report</a> is an adapter object which
+transforms a <code>DataSeries</code> object into data that is convenient to work
+with in formatted output.</li>
+<li><a href="subscription_counter/report/pdf.html">Report::PDF</a> generates a nicely
+formatted representation of the data contained in the <code>Report</code></li>
 </ul>
 
       </td>
       <td class=code>
         <div class='highlight'><pre><span class="n">require_relative</span> <span class="s2">&quot;subscription_counter/campaign&quot;</span>
-
 <span class="n">require_relative</span> <span class="s2">&quot;subscription_counter/data_point&quot;</span>
 <span class="n">require_relative</span> <span class="s2">&quot;subscription_counter/data_series&quot;</span>
 <span class="n">require_relative</span> <span class="s2">&quot;subscription_counter/graph&quot;</span>
