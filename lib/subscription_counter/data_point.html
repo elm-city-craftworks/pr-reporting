@@ -31,6 +31,57 @@
     </tr>
   </thead>
   <tbody>
+    <tr id='section-1'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-1">&#182;</a>
+        </div>
+        <p><code>DataPoint</code> objects are simple structures which are similar to
+<a href="campaign">Campaign</a> objects, but not tied to the 
+<a href="http://apidocs.mailchimp.com">MailChimp API</a> in any way. This object
+implements part of the interface that the <a href="report">Report</a> object 
+implicitly depend upon.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre><span class="k">module</span> <span class="nn">SubscriptionCounter</span>
+  <span class="k">class</span> <span class="nc">DataPoint</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-2'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-2">&#182;</a>
+        </div>
+        <hr/>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>    </pre></div>
+      </td>
+    </tr>
+    <tr id='section-3'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-3">&#182;</a>
+        </div>
+        <p>While <code>DataPoint.new</code> is unlikely to be called directly by anything except
+<code>DataSeries</code>, it&rsquo;s a good habit to use <code>Hash#fetch</code> here to indicate that all
+<code>params</code> are mandatory. This will catch typos or misuses of the API
+easily.</p>
+
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="vi">@number</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="ss">:number</span><span class="p">)</span>
+      <span class="vi">@date</span>   <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="ss">:date</span><span class="p">)</span>
+      <span class="vi">@count</span>  <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="ss">:count</span><span class="p">)</span>
+      <span class="vi">@delta</span>  <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="ss">:delta</span><span class="p">)</span>
+    <span class="k">end</span>
+
+    <span class="kp">attr_reader</span> <span class="ss">:number</span><span class="p">,</span> <span class="ss">:date</span><span class="p">,</span> <span class="ss">:count</span><span class="p">,</span> <span class="ss">:delta</span>
+  <span class="k">end</span>
+<span class="k">end</span></pre></div>
+      </td>
+    </tr>
   </table>
 </div>
 </body>
