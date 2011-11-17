@@ -40,7 +40,7 @@
 <code>Report</code> object into a nicely formatted PDF document. It uses
 <a href="http://github.com/sandal/prawn">Prawn</a> to generate the text and tables, and
 leans on <a href="https://github.com/alexgutteridge/rsruby">RSRuby</a> via my 
-trivial <a href="http://elm-city-craftworks.github.com/pr-reporting/lib/subscription_counter/graph.html">Graph</a> wrapper object.</p>
+trivial <a href="/pr-reporting/lib/subscription_counter/graph.html">Graph</a> wrapper object.</p>
 
 <p>Because the report this implements is meant to represent a fixed amount of
 information at a time, I cut a lot of corners and sized/positioned many of the
@@ -382,28 +382,12 @@ numeric, so it makes sense to right align them.</p>
           <a class="pilcrow" href="#section-21">&#182;</a>
         </div>
         <p><em>NOTE</em>: If you&rsquo;ve been doing the guided walkthrough, congratulations, you&rsquo;ve
-made it to the end! Below I&rsquo;ve listed the source for my executable file 
-that I use to tie all these objects together. </p>
-      </td>
-      <td class=code>
-        <div class='highlight'><pre></pre></div>
-      </td>
-    </tr>
-    <tr id='section-22'>
-      <td class=docs>
-        <div class="pilwrap">
-          <a class="pilcrow" href="#section-22">&#182;</a>
-        </div>
-        <pre>
-   require_relative &ldquo;../lib/subscription_counter&rdquo;
+made it to the end! You can explore more by [checking out the repository on
+Github], or you can return to <a href="http://practicingruby.com">practicingruby.com</a> and
+leave me a comment. Feedback is welcome!</p>
 
-   campaigns = SubscriptionCounter::Campaign.all
-   series    = SubscriptionCounter::DataSeries.new(campaigns, 10)
-   report    = SubscriptionCounter::Report.new(series)
-
-   SubscriptionCounter::Report::PDF.new(report)
-     .save_as(ARGV[0] || &ldquo;pr-subscribers.pdf&rdquo;)
-</pre>
+<p>If instead you&rsquo;ve been jumping around, you can go back to the <a href="/pr-reporting/lib/subscription_counter.html">project 
+overview page</a> for an outline of all the objects in this system.</p>
 
       </td>
       <td class=code>
