@@ -41,11 +41,7 @@ Issue 2.13. </p>
       </td>
       <td class=code>
         <div class='highlight'><pre><span class="nb">require</span> <span class="s2">&quot;date&quot;</span>
-<span class="nb">require</span> <span class="s2">&quot;tempfile&quot;</span>
-
-<span class="nb">require</span> <span class="s2">&quot;rsruby&quot;</span>
-<span class="nb">require</span> <span class="s2">&quot;hominid&quot;</span>
-<span class="nb">require</span> <span class="s2">&quot;prawn&quot;</span></pre></div>
+<span class="nb">require</span> <span class="s2">&quot;tempfile&quot;</span></pre></div>
       </td>
     </tr>
     <tr id='section-2'>
@@ -53,18 +49,33 @@ Issue 2.13. </p>
         <div class="pilwrap">
           <a class="pilcrow" href="#section-2">&#182;</a>
         </div>
-        <p>Storing API keys in git is a bad idea, so we define some values 
-in the <em>mailchimps</em>settings.rb_ file which is later referenced
-via the <code>SubscriptionCounter::MAILCHIMP_SETTINGS</code> constant.</p>
+        <p>I make use of RsRuby to integrate with the R
+programming language for graphing and basic stats computations, Hominid for
+integrating with MailChimp, and Prawn for PDF generation.</p>
       </td>
       <td class=code>
-        <div class='highlight'><pre><span class="n">require_relative</span> <span class="s2">&quot;../config/mailchimp_settings&quot;</span></pre></div>
+        <div class='highlight'><pre><span class="nb">require</span> <span class="s2">&quot;rsruby&quot;</span>
+<span class="nb">require</span> <span class="s2">&quot;hominid&quot;</span>
+<span class="nb">require</span> <span class="s2">&quot;prawn&quot;</span></pre></div>
       </td>
     </tr>
     <tr id='section-3'>
       <td class=docs>
         <div class="pilwrap">
           <a class="pilcrow" href="#section-3">&#182;</a>
+        </div>
+        <p>Storing API keys in git is a bad idea, so I define some values 
+in the <em>mailchimps</em>settings.rb_ file and reference them later
+via the <code>SubscriptionCounter::MAILCHIMP_SETTINGS</code> constant.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre><span class="n">require_relative</span> <span class="s2">&quot;../config/mailchimp_settings&quot;</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-4'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-4">&#182;</a>
         </div>
         <p><a href="subscription_counter/campaign.html">SubscriptionCounter::Campaign</a> integrates
 with MailChimp to pull down subscriber counts and dates for each campaign.</p>
