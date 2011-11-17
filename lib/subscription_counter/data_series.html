@@ -96,10 +96,6 @@ what <code>Enumerable</code> provides.</p>
 objects, the dependency is implicit and other objects could easily be
 substituted. This is by design.</p>
 
-<p>This method keeps track of the campaign number, which corresponds to the
-Practicing Ruby issue number. This could have been done in
-<code>Campaign.all</code>, but would have been slightly less convenient there.</p>
-
 <p>Using <code>each_cons</code> combined with <code>map</code> to traverse the campaign list is a 
 handy way to simultaneously create a new <code>DataPoint</code> object for the current
 campaign while also keeping track of the one that immediately
@@ -108,9 +104,15 @@ preceded it.</p>
 <p>Additionally, by introducing the <code>DataPoint</code> object, we make it so that the rest of
 our report is completely independent of the MailChimp dependency and
 the &ldquo;campaign&rdquo; vocabulary.</p>
+
+<p>Note that each <code>DataPoint</code> is assigned a campaign number which corresponds
+to Practicing Ruby issue numbers. While it&rsquo;s a bit awkward to do this
+logic here, it&rsquo;s even more awkward to do it elsewhere, so this is where it
+ended up.</p>
       </td>
       <td class=code>
-        <div class='highlight'><pre>    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">campaigns</span><span class="p">,</span> <span class="n">num_weeks</span><span class="p">)</span>
+        <div class='highlight'><pre>    
+    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">campaigns</span><span class="p">,</span> <span class="n">num_weeks</span><span class="p">)</span>
       <span class="n">campaign_number</span> <span class="o">=</span> <span class="n">campaigns</span><span class="o">.</span><span class="n">size</span> <span class="o">-</span> <span class="n">num_weeks</span>
 
 
