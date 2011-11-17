@@ -80,12 +80,38 @@ those options sound good, it is worth it to sacrifice some
 purity in the name of convenience. However, be sure to note that
 mixing in a module for the sole purpose of stripping namespaces 
 is a code smell and should usually be avoided.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>      <span class="kp">include</span> <span class="no">Prawn</span><span class="o">::</span><span class="no">Measurements</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-4'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-4">&#182;</a>
+        </div>
+        <hr/>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>      </pre></div>
+      </td>
+    </tr>
+    <tr id='section-5'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-5">&#182;</a>
+        </div>
+        <p>When a <code>Report::PDF</code> instance is created, all the important drawing
+operations are executed immediately. The text, tables, and graphs are
+all drawn, and all that remains to be done is to explicitly write the
+file via a call to <code>Report::PDF#save_as</code>. The current design does not
+allow for anything useful to happen after a call to <code>Report::PDF.new</code>
+but before a call to <code>Report::PDF#save_as</code>, but this API was set up this
+way by design to leave room for extension points later.</p>
 
       </td>
       <td class=code>
-        <div class='highlight'><pre>      <span class="kp">include</span> <span class="no">Prawn</span><span class="o">::</span><span class="no">Measurements</span>
-
-      <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">report</span><span class="p">)</span>
+        <div class='highlight'><pre>      <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">report</span><span class="p">)</span>
         <span class="vi">@report</span>   <span class="o">=</span> <span class="n">report</span>
         <span class="vi">@document</span> <span class="o">=</span> <span class="no">Prawn</span><span class="o">::</span><span class="no">Document</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:page_layout</span>   <span class="o">=&gt;</span> <span class="ss">:landscape</span><span class="p">,</span>
                                         <span class="ss">:top_margin</span>    <span class="o">=&gt;</span> <span class="n">in2pt</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
