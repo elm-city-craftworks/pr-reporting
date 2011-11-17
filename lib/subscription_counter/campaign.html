@@ -31,6 +31,61 @@
     </tr>
   </thead>
   <tbody>
+    <tr id='section-1'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-1">&#182;</a>
+        </div>
+        <p>The campaign object is the only part of this application which interacts
+directly with MailChimp, using Hominid to do so.</p>
+
+      </td>
+      <td class=code>
+        <div class='highlight'><pre><span class="k">module</span> <span class="nn">SubscriptionCounter</span>
+  <span class="k">class</span> <span class="nc">Campaign</span>
+    <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">all</span>
+      <span class="n">api</span>  <span class="o">=</span> <span class="no">Hominid</span><span class="o">::</span><span class="no">API</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="no">MAILCHIMP_SETTINGS</span><span class="o">[</span><span class="ss">:api_key</span><span class="o">]</span><span class="p">)</span>
+      <span class="n">data</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">campaigns</span><span class="p">(</span><span class="ss">:list_id</span> <span class="o">=&gt;</span> <span class="no">MAILCHIMP_SETTINGS</span><span class="o">[</span><span class="ss">:list_id</span><span class="o">]</span><span class="p">)</span><span class="o">[</span><span class="s2">&quot;data&quot;</span><span class="o">]</span>
+      
+      <span class="n">campaigns</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">e</span><span class="o">|</span>
+        <span class="kp">new</span><span class="p">(</span><span class="ss">:api</span>  <span class="o">=&gt;</span> <span class="n">api</span><span class="p">,</span> 
+            <span class="ss">:id</span>   <span class="o">=&gt;</span> <span class="n">e</span><span class="o">[</span><span class="s2">&quot;id&quot;</span><span class="o">]</span><span class="p">,</span> 
+            <span class="ss">:date</span> <span class="o">=&gt;</span> <span class="no">Date</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">e</span><span class="o">[</span><span class="s2">&quot;send_time&quot;</span><span class="o">]</span><span class="p">))</span>
+      <span class="k">end</span>
+      
+      <span class="n">campaigns</span><span class="o">.</span><span class="n">sort</span> 
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="vi">@api</span>  <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="ss">:api</span><span class="p">)</span>
+      <span class="vi">@id</span>   <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="ss">:id</span><span class="p">)</span>
+      <span class="vi">@date</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="ss">:date</span><span class="p">)</span>
+    <span class="k">end</span>
+
+    <span class="kp">attr_reader</span> <span class="ss">:date</span>
+
+    <span class="k">def</span> <span class="nf">&lt;=&gt;</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+      <span class="n">date</span> <span class="o">&lt;=&gt;</span> <span class="n">other</span><span class="o">.</span><span class="n">date</span>
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nf">subscriber_count</span>
+      <span class="n">conditions</span> <span class="o">=</span> <span class="o">[</span><span class="p">{</span><span class="ss">:field</span> <span class="o">=&gt;</span> <span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="ss">:op</span> <span class="o">=&gt;</span> <span class="s2">&quot;lt&quot;</span><span class="p">,</span> <span class="ss">:value</span> <span class="o">=&gt;</span> <span class="nb">id</span><span class="p">},</span>
+                    <span class="p">{</span><span class="ss">:field</span> <span class="o">=&gt;</span> <span class="s2">&quot;interests-</span><span class="si">#{</span><span class="no">MAILCHIMP_SETTINGS</span><span class="o">[</span><span class="ss">:grouping_id</span><span class="o">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> 
+                     <span class="ss">:op</span>    <span class="o">=&gt;</span> <span class="s2">&quot;none&quot;</span><span class="p">,</span> 
+                     <span class="ss">:value</span> <span class="o">=&gt;</span> <span class="s2">&quot;Free Subscription&quot;</span><span class="p">}</span><span class="o">]</span>
+
+      <span class="n">api</span><span class="o">.</span><span class="n">campaign_segment_test</span> <span class="no">MAILCHIMP_SETTINGS</span><span class="o">[</span><span class="ss">:list_id</span><span class="o">]</span><span class="p">,</span> 
+                                <span class="ss">:match</span>      <span class="o">=&gt;</span> <span class="s2">&quot;all&quot;</span><span class="p">,</span> 
+                                <span class="ss">:conditions</span> <span class="o">=&gt;</span> <span class="n">conditions</span> 
+    <span class="k">end</span>
+
+    <span class="kp">private</span> 
+
+    <span class="kp">attr_reader</span> <span class="ss">:api</span><span class="p">,</span> <span class="ss">:id</span>
+  <span class="k">end</span>
+<span class="k">end</span></pre></div>
+      </td>
+    </tr>
   </table>
 </div>
 </body>
