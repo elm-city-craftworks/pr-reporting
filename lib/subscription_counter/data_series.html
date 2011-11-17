@@ -122,7 +122,6 @@ ended up.</p>
       <span class="vi">@data</span> <span class="o">=</span> <span class="n">campaigns</span><span class="o">.</span><span class="n">last</span><span class="p">(</span><span class="n">num_weeks</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">each_cons</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">last</span><span class="p">,</span> <span class="n">current</span><span class="o">|</span>
         <span class="n">campaign_number</span> <span class="o">+=</span> <span class="mi">1</span>
 
-
         <span class="no">DataPoint</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:number</span> <span class="o">=&gt;</span> <span class="n">campaign_number</span><span class="p">,</span> 
                       <span class="ss">:date</span>   <span class="o">=&gt;</span> <span class="n">current</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y.%m.%d&quot;</span><span class="p">),</span> 
                       <span class="ss">:count</span>  <span class="o">=&gt;</span> <span class="n">current</span><span class="o">.</span><span class="n">subscriber_count</span><span class="p">,</span>
