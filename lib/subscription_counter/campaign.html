@@ -73,9 +73,9 @@ the list reference by <code>MAILCHIMP_SETTINGS[:list_id]</code></p>
 gets normalized slightly and then transformed into <code>Campaign</code> 
 instances. </p>
 
-<p>To make life easier later, we sort the output by date. Note that this
-makes use of the <code>Campaign#&lt;=&gt;</code> method automatically: Ruby is smart like
-that.</p>
+<p>To make life easier later, the list of campaigns is sorted by date at this time. 
+Note that this makes use of the <code>Campaign#&lt;=&gt;</code> method automatically: Ruby is 
+smart like that.</p>
       </td>
       <td class=code>
         <div class='highlight'><pre>    <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">all</span>
