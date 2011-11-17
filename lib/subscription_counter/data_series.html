@@ -40,9 +40,9 @@
 report actually target the last N campaigns (roughly corresponding to weeks in
 Practicing Ruby&rsquo;s case). I created this <code>DataSeries</code> object to deal with that
 issue as well as to provide a bit of a bufferzone between the code that
-interacts with the MailChimp API and the rest of the system. This in theory
-will make it easier for me to pull from other data sources in the future, and
-also makes testing easier.</p>
+interacts with the <a href="http://apidocs.mailchimp.com/">MailChimp API</a> and the rest 
+of the system. This in theory will make it easier for me to pull from other 
+data sources in the future, and also makes testing easier.</p>
       </td>
       <td class=code>
         <div class='highlight'><pre></pre></div>
@@ -70,16 +70,46 @@ also makes testing easier.</p>
 module. While in this particular application I only use this for the <code>map</code>
 method, it would be surprising to provide just <code>map</code> and not the rest of
 what <code>Enumerable</code> provides.</p>
-
       </td>
       <td class=code>
         <div class='highlight'><pre>    
-    <span class="kp">include</span> <span class="no">Enumerable</span>
+    <span class="kp">include</span> <span class="no">Enumerable</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-4'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-4">&#182;</a>
+        </div>
+        <p>The executable file that runs this report instantiates a <code>DataSeries</code> object as
+shown below:</p>
 
-    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">campaigns</span><span class="p">,</span> <span class="n">num_weeks</span><span class="p">)</span>
-      <span class="n">campaign_number</span> <span class="o">=</span> <span class="n">campaigns</span><span class="o">.</span><span class="n">size</span> <span class="o">-</span> <span class="n">num_weeks</span>
+<pre><code>campaigns = SubscriptionCounter::Campaign.all
+series    = SubscriptionCounter::DataSeries.new(campaigns, 10)
+</code></pre>
 
-      <span class="vi">@data</span> <span class="o">=</span> <span class="n">campaigns</span><span class="o">.</span><span class="n">last</span><span class="p">(</span><span class="n">num_weeks</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">each_cons</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">last</span><span class="p">,</span> <span class="n">current</span><span class="o">|</span>
+<p>While <code>DataSeries</code> is designed to work with an array of <code>Campaign</code>
+objects, the dependency is implicit and other objects could easily be
+substituted. This is by design.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">campaigns</span><span class="p">,</span> <span class="n">num_weeks</span><span class="p">)</span>
+      <span class="n">campaign_number</span> <span class="o">=</span> <span class="n">campaigns</span><span class="o">.</span><span class="n">size</span> <span class="o">-</span> <span class="n">num_weeks</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-5'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-5">&#182;</a>
+        </div>
+        <p>Using <code>each_cons</code> combined with <code>map</code> here is a handy way to
+simultaneously create a new <code>DataPoint</code> object for the current
+campaign while also keeping track of the one that immediately
+preceded it.</p>
+
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>      <span class="vi">@data</span> <span class="o">=</span> <span class="n">campaigns</span><span class="o">.</span><span class="n">last</span><span class="p">(</span><span class="n">num_weeks</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">each_cons</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">last</span><span class="p">,</span> <span class="n">current</span><span class="o">|</span>
         <span class="n">campaign_number</span> <span class="o">+=</span> <span class="mi">1</span>
 
         <span class="no">DataPoint</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:number</span> <span class="o">=&gt;</span> <span class="n">campaign_number</span><span class="p">,</span> 
