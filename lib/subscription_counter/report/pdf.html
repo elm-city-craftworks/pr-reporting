@@ -77,10 +77,8 @@ more challenging than it already is.</p>
 of thing, but the fact that Prawn does not provide a
 better way to specify point conversions which does not pollute the
 global namespace makes me feel like its worth it to sacrifice some
-purity in the name of convenience. The alternative is to
-<code>require &ldquo;prawn/measurement_extensions&rdquo;</code> and then write something like
-<code>1.in</code>, but this monkey patches <code>Numeric</code>, and that&rsquo;s probably a bad
-thing.</p>
+purity in the name of convenience. However, be sure to note that
+stripping namespaces is a code smell.</p>
 
       </td>
       <td class=code>
