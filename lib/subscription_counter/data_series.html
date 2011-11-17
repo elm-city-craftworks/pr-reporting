@@ -99,7 +99,11 @@ substituted. This is by design.</p>
 <p>Using <code>each_cons</code> combined with <code>map</code> to traverse the campaign list is a 
 handy way to simultaneously create a new <code>DataPoint</code> object for the current
 campaign while also keeping track of the one that immediately
-preceded it.</p>
+preceded it. Because this report covers both the current subscriber count
+for any given week as well as the change in subscriber count since the
+previous week, we need to keep track of this information. This explains
+why we end up looking at <code>num_weeks+1</code> rather than <code>num_weeks</code> worth of
+context.</p>
 
 <p>Additionally, by introducing the <code>DataPoint</code> object, we make it so that the rest of
 our report is completely independent of the MailChimp dependency and
