@@ -36,7 +36,11 @@
         <div class="pilwrap">
           <a class="pilcrow" href="#section-1">&#182;</a>
         </div>
-        
+        <p>The <code>Statistics</code> object is a thin wrapper over a computation that my report
+uses to guess at what the average change in subscriber count per week is. It
+originally used a lot more code than what it currently does, but now that this
+report uses R for graphing, I decided to use it for computing the mean and
+standard deviation of datasets as well.</p>
       </td>
       <td class=code>
         <div class='highlight'><pre><span class="k">module</span> <span class="nn">SubscriptionCounter</span>
@@ -50,10 +54,18 @@
         <div class="pilwrap">
           <a class="pilcrow" href="#section-2">&#182;</a>
         </div>
-        <p>Take a list and compute its standard deviation
-and mean, and then uses this information to reject
-outliers from the original list. Finally, compute
-the mean of the adjusted list.</p>
+        <hr/>
+
+<p>The <code>adjusted_mean</code> method takes an array of numbers and computes its mean
+and standard deviation. This information is used to determine which points
+should be treated as outliers and removed from the dataset.</p>
+
+<p>The reason I implemented this function is that it isn&rsquo;t uncommon for
+Practicing Ruby to see a huge bump when it gets mentioned somewhere, but
+the change in subscribers in that pariticular week won&rsquo;t be nearly 
+representative of the &ldquo;average week&rdquo;.I want to use average subscriber
+increase as a metric for how well Practicing Ruby is growing, but I don&rsquo;t
+want have false expectations about its growth rate due to outliers.</p>
 
       </td>
       <td class=code>
