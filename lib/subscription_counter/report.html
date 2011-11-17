@@ -31,6 +31,73 @@
     </tr>
   </thead>
   <tbody>
+    <tr id='section-1'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-1">&#182;</a>
+        </div>
+        <p>The <code>Report</code> object serves as a bridge between the data model and the
+presentation layer by extracting data from  <a href="data_series.html">DataSeries</a>
+objects and transforming them into a format that is convenient for 
+formatting objects to work with.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre><span class="k">module</span> <span class="nn">SubscriptionCounter</span>
+  <span class="k">class</span> <span class="nc">Report</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-2'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-2">&#182;</a>
+        </div>
+        <hr/>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre></pre></div>
+      </td>
+    </tr>
+    <tr id='section-3'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-3">&#182;</a>
+        </div>
+        <p>While <code>Report</code> is meant to be used with a <code>DataSeries</code> object, the
+dependency is implicit and other objects could be subsituted without too
+much effort. This is by design.</p>
+
+<p>The way this code generates the <code>issue_numbers</code>, <code>weekly_counts</code>, and
+<code>weekly_deltas</code> lists causes multiple passes through the series data
+unnecessarily. That said, with a tiny dataset I generally am willing to
+sacrifice a bit of efficiency in the name of clear and concise code. </p>
+
+<p>The <code>average_delta</code> computation is used by one of the report&rsquo;s graphs
+to display a baseline representing the average number of new subscribers
+gained each week, after outliers have been removed. Check out the
+<a href="statistics.html">Statistics</a> object if you want to see how this
+computation is implemented.</p>
+
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">series</span><span class="p">)</span>
+      <span class="vi">@series</span> <span class="o">=</span> <span class="n">series</span>
+
+      <span class="vi">@issue_numbers</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:number</span><span class="p">)</span>
+      <span class="vi">@weekly_counts</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:count</span><span class="p">)</span>
+      <span class="vi">@weekly_deltas</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:delta</span><span class="p">)</span>
+      <span class="vi">@average_delta</span> <span class="o">=</span> <span class="no">Statistics</span><span class="o">.</span><span class="n">adjusted_mean</span><span class="p">(</span><span class="vi">@weekly_deltas</span><span class="p">)</span>
+    <span class="k">end</span>
+
+    <span class="kp">attr_reader</span> <span class="ss">:issue_numbers</span><span class="p">,</span> <span class="ss">:weekly_counts</span><span class="p">,</span> <span class="ss">:weekly_deltas</span><span class="p">,</span> 
+                <span class="ss">:average_delta</span><span class="p">,</span> <span class="ss">:summary</span><span class="p">,</span> <span class="ss">:series</span>
+
+    <span class="k">def</span> <span class="nf">table</span><span class="p">(</span><span class="o">*</span><span class="n">fields</span><span class="p">)</span>
+      <span class="n">series</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">e</span><span class="o">|</span> <span class="n">fields</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span> <span class="n">e</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="p">}</span> <span class="p">}</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span></pre></div>
+      </td>
+    </tr>
   </table>
 </div>
 </body>
