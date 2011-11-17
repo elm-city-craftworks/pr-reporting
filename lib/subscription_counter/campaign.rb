@@ -4,7 +4,7 @@ module SubscriptionCounter
 
     def self.all
       api  = Hominid::API.new(MAILCHIMP_SETTINGS[:api_key])
-      data = api.campaigns(:list_id => MAILCHIMP_SETTINGS[:list_id] )["data"]
+      data = api.campaigns(:list_id => MAILCHIMP_SETTINGS[:list_id])["data"]
       
       campaigns = data.map do |e|
         new(:api    => api, 
