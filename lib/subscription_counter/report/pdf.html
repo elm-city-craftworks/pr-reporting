@@ -197,6 +197,14 @@ including margins) and separated by some vertical padding. These numbers
 were arrived at through trial and error, but a better approach would be
 to use a grid layout, which Prawn supports.</p>
 
+<p>Note that this method makes use of <code>Dir.mktmpdir</code> to render the graphs
+into a temporary directory. This makes it possible to embed them within
+the document and then unlink the entire directory automatically as soon
+as that is done. Prawn has support for rendering blobs of image data
+directly, but as of right now <code>Graph</code> writes to file. I would have to
+dig deeper into R to see if there is a way to avoid round tripping from
+memory to file and back again.</p>
+
       </td>
       <td class=code>
         <div class='highlight'><pre>      <span class="k">def</span> <span class="nf">draw_graphs</span>
