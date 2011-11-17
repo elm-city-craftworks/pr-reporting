@@ -55,14 +55,25 @@ Business reporting can be tricky in Ruby, and even modest reporting
 tasks demand a non-trivial amount of software design consideration.</p>
       </td>
       <td class=code>
-        <div class='highlight'><pre><span class="nb">require</span> <span class="s2">&quot;date&quot;</span>
-<span class="nb">require</span> <span class="s2">&quot;tempfile&quot;</span></pre></div>
+        <div class='highlight'><pre></pre></div>
       </td>
     </tr>
     <tr id='section-3'>
       <td class=docs>
         <div class="pilwrap">
           <a class="pilcrow" href="#section-3">&#182;</a>
+        </div>
+        <hr/>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre><span class="nb">require</span> <span class="s2">&quot;date&quot;</span>
+<span class="nb">require</span> <span class="s2">&quot;tempfile&quot;</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-4'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-4">&#182;</a>
         </div>
         <p>I make use of RsRuby to integrate with the R
 programming language for graphing and basic stats computations, Hominid for
@@ -74,10 +85,10 @@ integrating with MailChimp, and Prawn for PDF generation.</p>
 <span class="nb">require</span> <span class="s2">&quot;prawn&quot;</span></pre></div>
       </td>
     </tr>
-    <tr id='section-4'>
+    <tr id='section-5'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-4">&#182;</a>
+          <a class="pilcrow" href="#section-5">&#182;</a>
         </div>
         <p>Storing API keys in git is a bad idea, so I define some values 
 in the <em>mailchimps_settings.rb</em> file and reference them later
@@ -87,10 +98,10 @@ via the <code>SubscriptionCounter::MAILCHIMP_SETTINGS</code> constant.</p>
         <div class='highlight'><pre><span class="n">require_relative</span> <span class="s2">&quot;../config/mailchimp_settings&quot;</span></pre></div>
       </td>
     </tr>
-    <tr id='section-5'>
+    <tr id='section-6'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-5">&#182;</a>
+          <a class="pilcrow" href="#section-6">&#182;</a>
         </div>
         <p>I did what I could to make this code as modular as possible, although some
 modules still have some hardcoded values in them because I was aiming more for
