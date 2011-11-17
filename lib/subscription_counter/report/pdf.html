@@ -39,7 +39,8 @@
         <p>The <code>Report::PDF</code> object is responsible for composing the data provided by a
 <code>Report</code> object into a nicely formatted PDF document. It uses
 <a href="http://github.com/sandal/prawn">Prawn</a> to generate the text and tables, and
-leans on <a href="https://github.com/alexgutteridge/rsruby">RSRuby</a> via my trivial <a href="http://elm-city-craftworks.github.com/pr-reporting/lib/subscription_counter/graph.html">Graph</a> wrapper object.</p>
+leans on <a href="https://github.com/alexgutteridge/rsruby">RSRuby</a> via my 
+trivial <a href="http://elm-city-craftworks.github.com/pr-reporting/lib/subscription_counter/graph.html">Graph</a> wrapper object.</p>
 
 <p>Because the report this implements is meant to represent a fixed amount of
 information at a time, I cut a lot of corners and sized/positioned many of the
@@ -48,13 +49,42 @@ dynamically can be a real challenge, and would require much more clever
 composition than what you see here. Prawn has facilities that make that sort
 of reporting possible, but there is no need to make this particular report any
 more challenging than it already is.</p>
-
       </td>
       <td class=code>
         <div class='highlight'><pre><span class="k">module</span> <span class="nn">SubscriptionCounter</span>
   <span class="k">class</span> <span class="nc">Report</span>
-    <span class="k">class</span> <span class="nc">PDF</span>
-      <span class="kp">include</span> <span class="no">Prawn</span><span class="o">::</span><span class="no">Measurements</span>
+    <span class="k">class</span> <span class="nc">PDF</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-2'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-2">&#182;</a>
+        </div>
+        <hr/>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre></pre></div>
+      </td>
+    </tr>
+    <tr id='section-3'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-3">&#182;</a>
+        </div>
+        <p>Mixing in this module makes it possible to write <code>in2pt(1)</code> instead of
+<code>Prawn::Measurements.in2pt(1)</code>. I am generally against doing this sort
+of thing, but the fact that Prawn does not provide a
+better way to specify point conversions which does not pollute the
+global namespace makes me feel like its worth it to sacrifice some
+purity in the name of convenience. The alternative is to
+<code>require &ldquo;prawn/measurement_extensions&rdquo;</code> and then write something like
+<code>1.in</code>, but this monkey patches <code>Numeric</code>, and that&rsquo;s probably a bad
+thing.</p>
+
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>      <span class="kp">include</span> <span class="no">Prawn</span><span class="o">::</span><span class="no">Measurements</span>
 
       <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">report</span><span class="p">)</span>
         <span class="vi">@report</span>   <span class="o">=</span> <span class="n">report</span>
