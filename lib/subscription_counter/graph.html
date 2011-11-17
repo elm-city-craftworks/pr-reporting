@@ -56,11 +56,27 @@ changes, it will get increasingly hard to make those sort of switches if they
 weren&rsquo;t accounted for early on in its design. This is why it rarely hurts to
 create an internal API wrapping an external dependency, even if that wrapper
 is not doing much to generalize your code.</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre><span class="k">module</span> <span class="nn">SubscriptionCounter</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-2'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-2">&#182;</a>
+        </div>
+        <p>Here I&rsquo;ve used a non-standard approach to creating singleton objects in
+Ruby. I&rsquo;m generally fed up with the usual options of class methods or module
+methods, and so I am approaching this pattern by using a plain old Ruby
+object which I then reopen and add methods to.</p>
+
+<p>This approach has its upsides and downsides, all of which I&rsquo;ve discussed in
+<a href="http://practicingruby.com">Practicing Ruby</a> Issue 2.8. </p>
 
       </td>
       <td class=code>
-        <div class='highlight'><pre><span class="k">module</span> <span class="nn">SubscriptionCounter</span>
-  <span class="no">Graph</span> <span class="o">=</span> <span class="no">Object</span><span class="o">.</span><span class="n">new</span>
+        <div class='highlight'><pre>  <span class="no">Graph</span> <span class="o">=</span> <span class="no">Object</span><span class="o">.</span><span class="n">new</span>
   
   <span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="no">Graph</span>
     <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>    
