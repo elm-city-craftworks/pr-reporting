@@ -226,8 +226,17 @@ memory to file and back again.</p>
           <a class="pilcrow" href="#section-12">&#182;</a>
         </div>
         <hr/>
-
-<p>The <code>weekly_total_graph</code> method takes a temporary directory to write its
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>      </pre></div>
+      </td>
+    </tr>
+    <tr id='section-13'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-13">&#182;</a>
+        </div>
+        <p>The <code>weekly_total_graph</code> method takes a temporary directory to write its
 image in, and then passes data from the <code>Report</code> object into
 <code>Graph.build</code>. No transformations need to be done on the data because
 <code>Report</code> is designed with the needs of this code in mind.</p>
@@ -247,20 +256,28 @@ image in, and then passes data from the <code>Report</code> object into
       <span class="k">end</span></pre></div>
       </td>
     </tr>
-    <tr id='section-13'>
+    <tr id='section-14'>
       <td class=docs>
         <div class="pilwrap">
-          <a class="pilcrow" href="#section-13">&#182;</a>
+          <a class="pilcrow" href="#section-14">&#182;</a>
         </div>
         <hr/>
-
-<p>The <code>weekly_change_graph</code> method works in a similar manner to
+      </td>
+      <td class=code>
+        <div class='highlight'><pre></pre></div>
+      </td>
+    </tr>
+    <tr id='section-15'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-15">&#182;</a>
+        </div>
+        <p>The <code>weekly_change_graph</code> method works in a similar manner to
 <code>weekly_total_graph</code>. The only notable difference between the two
 (aside from operating on different data) is that <code>weekly_change_graph</code>
 provides a <em>baseline</em> value to <code>Graph.build</code>. This is used to render a
 dotted horizontal line representing the average change in subscribers
 over time.</p>
-
       </td>
       <td class=code>
         <div class='highlight'><pre>      <span class="k">def</span> <span class="nf">weekly_change_graph</span><span class="p">(</span><span class="n">dir</span><span class="p">)</span>
@@ -277,16 +294,63 @@ over time.</p>
         <span class="n">change_graph_file</span>
       <span class="k">end</span>
 
-
-      <span class="k">def</span> <span class="nf">draw_header</span>
+      </pre></div>
+      </td>
+    </tr>
+    <tr id='section-16'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-16">&#182;</a>
+        </div>
+        <hr/>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>      </pre></div>
+      </td>
+    </tr>
+    <tr id='section-17'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-17">&#182;</a>
+        </div>
+        <p>I&rsquo;ve rendered the headers on this report in a bit of a ham-handed way.
+Prawn can handle text wrapping within a column just fine, but because
+this text is hard coded, I decided to simply embed linebreaks myself.
+Don&rsquo;t take this approach as a best practice for working with Prawn :)</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>      <span class="k">def</span> <span class="nf">draw_header</span>
         <span class="n">document</span><span class="o">.</span><span class="n">text</span> <span class="s2">&quot;Practicing Ruby Weekly Report&quot;</span><span class="p">,</span> <span class="ss">:size</span> <span class="o">=&gt;</span> <span class="mi">24</span>
         <span class="n">document</span><span class="o">.</span><span class="n">text</span> <span class="s2">&quot;This report summarizes the subscriber count and &quot;</span><span class="o">+</span>
                        <span class="s2">&quot;change in</span><span class="se">\n</span><span class="s2">subscriber count over time.&quot;</span>
 
         <span class="n">document</span><span class="o">.</span><span class="n">move_down</span><span class="p">(</span><span class="n">in2pt</span><span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">75</span><span class="p">))</span>
-      <span class="k">end</span>
+      <span class="k">end</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-18'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-18">&#182;</a>
+        </div>
+        <hr/>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre></pre></div>
+      </td>
+    </tr>
+    <tr id='section-19'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-19">&#182;</a>
+        </div>
+        <p>To render the summary table, a header row is added to the array of arrays
+provided by <code>Report.table</code>. All columns except for the date column are
+numeric, so it makes sense to right align them.</p>
 
-      <span class="k">def</span> <span class="nf">draw_summary_table</span>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>      <span class="k">def</span> <span class="nf">draw_summary_table</span>
         <span class="n">header</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;Date&quot;</span><span class="p">,</span>              <span class="s2">&quot;Issue Number&quot;</span><span class="p">,</span> 
                   <span class="s2">&quot;Total Subscribers&quot;</span><span class="p">,</span> <span class="s2">&quot;Change in Subscribers&quot;</span><span class="o">]</span>
 
